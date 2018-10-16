@@ -198,9 +198,35 @@ else {
 
 
 // --------------------------------------------------------------------------------------
-// début de la zone attribuée au développeur 1 (xxxxxxxxxxxxxxxxxxxx) : lignes 200 à 299
+// début de la zone attribuée au développeur 1 (Leilla) : lignes 200 à 299
 // --------------------------------------------------------------------------------------
+// test de la méthode autoriseAConsulter ----------------------------------------------------------
+// modifié par Jim le 13/8/2018
+echo "<h3>Test de autoriseAConsulter : </h3>";
+if ($dao->autoriseAConsulter(2, 3)) $autorise = "oui"; else $autorise = "non";
+echo "<p>L'utilisateur 2 autorise l'utilisateur 3 : <b>" . $autorise . "</b><br>";
 
+if ($dao->autoriseAConsulter(3, 2)) $autorise = "oui"; else $autorise = "non";
+echo "<p>L'utilisateur 3 autorise l'utilisateur 2 : <b>" . $autorise . "</b><br>";
+
+// test de la méthode creerUneAutorisation ---------------------------------------------------------
+// modifié par Jim le 13/8/2018
+echo "<h3>Test de creerUneAutorisation : </h3>";
+if ($dao->creerUneAutorisation(2, 1)) $ok = "oui"; else $ok = "non";
+echo "<p>La création de l'autorisation de l'utilisateur 2 vers l'utilisateur 1 a réussi : <b>" . $ok . "</b><br>";
+// la même autorisation ne peut pas être enregistrée 2 fois
+if ($dao->creerUneAutorisation(2, 1)) $ok = "oui"; else $ok = "non";
+echo "<p>La création de l'autorisation de l'utilisateur 2 vers l'utilisateur 1 a réussi : <b>" . $ok . "</b><br>";
+
+// test de la méthode supprimerUneAutorisation ----------------------------------------------------
+// modifié par Jim le 13/8/2018
+echo "<h3>Test de supprimerUneAutorisation : </h3>";
+// on crée une autorisation
+if ($dao->creerUneAutorisation(2, 1)) $ok = "oui"; else $ok = "non";
+echo "<p>La création de l'autorisation de l'utilisateur 2 vers l'utilisateur 1 a réussi : <b>" . $ok . "</b><br>";
+// puis on la supprime
+if ($dao->supprimerUneAutorisation(2, 1)) $ok = "oui"; else $ok = "non";
+echo "<p>La suppression de l'autorisation de l'utilisateur 2 vers l'utilisateur 1 a réussi : <b>" . $ok . "</b><br>";
 
 
 
@@ -400,6 +426,7 @@ else {
 // début de la zone attribuée au développeur 3 (LE SAINT) : lignes 400 à 499
 // test de la méthode creerUneTrace ----------------------------------------------------------
 // modifié par LE SAINT 16/10/18
+/*
 echo "<h3>Test de creerUneTrace : </h3>";
 $trace1 = new Trace(0, "2017-12-18 14:00:00", "2017-12-18 14:10:00", true, 3);
 $ok = $dao->creerUneTrace($trace1);
@@ -419,7 +446,7 @@ if ($ok) {
 else {
     echo "<p>Echec lors de l'enregistrement de la trace !</p>";
 }
-
+*/
 
 
 

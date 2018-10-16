@@ -348,9 +348,68 @@ class DAO
     
     
     // --------------------------------------------------------------------------------------
-    // début de la zone attribuée au développeur 1 (xxxxxxxxxxxxxxxxxxxx) : lignes 350 à 549
+    // début de la zone attribuée au développeur 1 (Leilla) : lignes 350 à 549
     // --------------------------------------------------------------------------------------
     
+    //cette fonction indique si l'utilisateur autorise un autre utilisateur à consulter ses traces
+    // paramètre(s) : $idAutorisant  ==> l'id de l'utilisateur qui autorise, $idAutorise ==> l'id de l'utilisateur qui est autorisé
+    // valeur de retour : un booléen "true" si la modification a bien eu lieu, "false" sinon
+    public function autoriseAConsulter($idAutorisant, $idAutorise){
+        $txt_req = "select count(*) from tracegps_autorisations where idAutorisant = :idAutorisant and idAutorise = :idAutorise ";
+        $req = $this->cnx->prepare($txt_req);
+        // liaison de la requête et de ses paramètres
+        $req->bindValue("idAutorisant", $idAutorisant, PDO::PARAM_STR);
+        $req->bindValue("idAutorise", $idAutorise, PDO::PARAM_STR);
+        // exécution de la requete
+        $req->execute();
+        $nbReponses = $req->fetchColumn(0);
+        // libère les ressources du jeu de données
+        $req->closeCursor();
+        
+        // fourniture de la réponse
+        if ($nbReponses == 0) {
+            return false;
+        }
+        else {
+            return true;
+        }
+        
+        // fourniture de la réponse
+        return $ok;
+    }
+    
+    //cette fonction indique si l'utilisateur autorise un autre utilisateur à consulter ses traces
+    // paramètre(s) : $idAutorisant  ==> l'id de l'utilisateur qui autorise, $idAutorise ==> l'id de l'utilisateur qui est autorisé
+    // valeur de retour : un booléen "true" si la modification a bien eu lieu, "false" sinon
+    public function creerUneAutorisation($idAutorisant, $idAutorise){
+        $txt_req = "insert into tracegps_autorisations values (:idAutorisant,:idAutorise)";
+        $req = $this->cnx->prepare($txt_req);
+        // liaison de la requête et de ses paramètres
+        $req->bindValue("idAutorisant", $idAutorisant, PDO::PARAM_STR);
+        $req->bindValue("idAutorise", $idAutorise, PDO::PARAM_STR);
+        // exécution de la requete
+        $ok=$req->execute();
+       
+        // fourniture de la réponse
+        return $ok;
+    }
+
+    //cette fonction permet de suprimer une autorisation
+    // paramètre(s) : $idAutorisant ==> l'id de l'utilisateur qui autorise, $idAutorise ==> l'id de l'utilisateur qui est autorisé
+    // valeur de retour : un booléen "true" si la modification a bien eu lieu, "false" sinon
+    public function supprimerUneAutorisation($idAutorisant, $idAutorise){
+        // préparation de la requete de suppression
+        $txt_req = "DELETE from tracegps_autorisations where idAutorisant = :idAutorisant and idAutorise = :idAutorise ";
+        $req = $this->cnx->prepare($txt_req);
+        // liaison de la requête et de ses paramètres
+        $req->bindValue("idAutorisant", $idAutorisant, PDO::PARAM_STR);
+        $req->bindValue("idAutorise", $idAutorise, PDO::PARAM_STR);
+        // exécution de la requete
+        $ok = $req->execute();
+        
+        // fourniture de la réponse
+        return $ok;
+    }
 
     
     
@@ -485,68 +544,7 @@ class DAO
     
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
     // --------------------------------------------------------------------------------------
     // début de la zone attribuée au développeur 2 (Dylan VALLÉE) : lignes 550 à 749
     // --------------------------------------------------------------------------------------
