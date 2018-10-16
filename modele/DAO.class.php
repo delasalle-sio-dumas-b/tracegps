@@ -747,12 +747,31 @@ class DAO
     
     
     
-    // --------------------------------------------------------------------------------------
     // début de la zone attribuée au développeur 3 (LE SAINT Clément) : lignes 750 à 949
-    // --------------------------------------------------------------------------------------
-    
-    
-    
+   
+    public function creerUneTrace($uneTrace) {
+        // on teste si l'utilisateur existe déjà
+        // préparation de la requête
+        $txt_req1 = "insert into tracegps_traces (dateDebut, dateFin, terminee, idUtilisateur)";
+        $txt_req1 .= " values (:dateDebut, :dateFin, :terminee, :idUtilisateur)";
+        $req1 = $this->cnx->prepare($txt_req1);
+        // liaison de la requête et de ses paramètres
+        $req1->bindValue("dateDebut", utf8_decode($uneTrace->getDateHeureDebut()), PDO::PARAM_STR);
+        
+        if($uneTrace->getDateHeureFin()== NULL)
+        {        
+            $req1->bindValue("dateFin", null, PDO::PARAM_NULL);
+        }
+        else
+        {        
+            $req1->bindValue("dateFin", utf8_decode($uneTrace->getDateHeureFin()), PDO::PARAM_STR);
+        }
+        $req1->bindValue("terminee", utf8_decode($uneTrace->getTerminee()), PDO::PARAM_STR);
+        $req1->bindValue("idUtilisateur", utf8_decode($uneTrace->getIdUtilisateur()), PDO::PARAM_STR);
+        // exécution de la requête
+        $ok = $req1->execute();
+        return $ok; 
+    }
     
     
     
@@ -948,7 +967,7 @@ class DAO
     
    
     // --------------------------------------------------------------------------------------
-    // début de la zone attribuée au développeur 3 (xxxxxxxxxxxxxxxxxxxx) : lignes 950 à 1150
+    // début de la zone attribuée au développeur 4 (xxxxxxxxxxxxxxxxxxxx) : lignes 950 à 1150
     // --------------------------------------------------------------------------------------
     
     
