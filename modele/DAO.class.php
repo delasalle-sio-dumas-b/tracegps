@@ -126,7 +126,7 @@ class DAO
         $nbReponses = $req->fetchColumn(0);
         // libère les ressources du jeu de données
         $req->closeCursor();
-        
+
         // fourniture de la réponse
         if ($nbReponses == 0) {
             return false;
@@ -550,8 +550,44 @@ class DAO
     // --------------------------------------------------------------------------------------
     // début de la zone attribuée au développeur 2 (Dylan VALLÉE) : lignes 550 à 749
     // --------------------------------------------------------------------------------------
-    
 
+    public function existeAdrMailUtilisateur($adr) {
+        // préparation de la requête de recherche
+        $txt_req = "Select count(*) from tracegps_utilisateurs where adrMail = :adr";
+        $req = $this->cnx->prepare($txt_req);
+        // liaison de la requête et de ses paramètres
+        $req->bindValue("adr", $adr, PDO::PARAM_STR);
+        // exécution de la requête
+        $req->execute();
+        $nbReponses = $req->fetchColumn(0);
+        // libère les ressources du jeu de données
+        $req->closeCursor();
+
+        // fourniture de la réponse
+        if ($nbReponses == 0) {
+            return false;
+        }
+        else {
+            return true;
+        }
+    }
+
+    public function getLesUtilisateursAutorisant($idAutorise) {
+        $txt_req = "SELECT id, pseudo, mdpSha1, adrMail, numTel, niveau, dateCreation, nbTraces, dateDerniereTrace
+                    FROM tracegps_vue_utilisateurs, tracegps_autorisations
+                    WHERE idAutorise = :id";
+
+        $req = $this->cnx->prepare($txt_req);
+
+        $req->bindValue("id", $idAutorise, PDO::PARAM_INT);
+
+        $req->execute();
+        $reponses = $req->fetchColumn(0);
+
+        $req->closeCursor();
+
+        return $reponses;
+    }
     
     
     
