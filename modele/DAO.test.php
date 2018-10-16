@@ -413,6 +413,9 @@ foreach ($lesUtilisateurs as $unUtilisateur)
 
 
 
+// --------------------------------------------------------------------------------------
+// début de la zone attribuée au développeur 3 (xxxxxxxxxxxxxxxxxxxx) : lignes 400 à 499
+// --------------------------------------------------------------------------------------
 
 
 
@@ -516,7 +519,6 @@ else {
 
 
 
-// début de la zone attribuée au développeur 4 (XXXX) : lignes 500 à 599
 
 
 
@@ -534,6 +536,20 @@ else {
 
 
 
+// --------------------------------------------------------------------------------------
+// début de la zone attribuée au développeur 4 (DUMAS Benjamin) : lignes 500 à 599
+// --------------------------------------------------------------------------------------
+
+// test de la méthode supprimerUneTrace -----------------------------------------------------------
+// modifié par Jim le 15/8/2018
+echo "<h3>Test de supprimerUneTrace : </h3>";
+$ok = $dao->supprimerUneTrace(22);
+if ($ok) {
+    echo "<p>Trace bien supprimée !</p>";
+}
+else {
+    echo "<p>Echec lors de la suppression de la trace !</p>";
+}
 
 // ferme la connexion à MySQL :
 unset($dao);

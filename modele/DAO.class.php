@@ -548,7 +548,7 @@ class DAO
     
     
     // --------------------------------------------------------------------------------------
-    // début de la zone attribuée au développeur 2 (Dylan VALLÉE) : lignes 550 à 749
+    // début de la zone attribuée au développeur 2 (xxxxxxxxxxxxxxxxxxxx) : lignes 550 à 749
     // --------------------------------------------------------------------------------------
 
     public function existeAdrMailUtilisateur($adr) {
@@ -784,7 +784,7 @@ class DAO
     
     
     // --------------------------------------------------------------------------------------
-    // début de la zone attribuée au développeur 3 (LE SAINT Clément) : lignes 750 à 949
+    // début de la zone attribuée au développeur 3 (xxxxxxxxxxxxxxxxxxxx) : lignes 750 à 949
     // --------------------------------------------------------------------------------------
     
     
@@ -984,10 +984,34 @@ class DAO
     
    
     // --------------------------------------------------------------------------------------
-    // début de la zone attribuée au développeur 3 (xxxxxxxxxxxxxxxxxxxx) : lignes 950 à 1150
+    // début de la zone attribuée au développeur 4 (DUMAS Benjamin) : lignes 950 à 1150
     // --------------------------------------------------------------------------------------
     
-    
+    public function supprimerUneTrace($id) {
+        $uneTrace = $this->getLesTraces($id);
+        if ($uneTrace == null) {
+            return false;
+        }
+        else {
+            $idTrace = $uneTrace->getId();
+            
+            // suppression des traces de l'utilisateur (et des points correspondants)
+            $lesTraces = $this->getLesTraces($idTrace);
+            foreach ($lesTraces as $uneTrace) {
+                $this->supprimerUneTrace($uneTrace->getId());
+            }
+            
+            // préparation de la requête de suppression de l'utilisateur
+            $txt_req2 = "delete from tracegps_trace" ;
+            $txt_req2 .= " where id = :id";
+            $req2 = $this->cnx->prepare($txt_req2);
+            // liaison de la requête et de ses paramètres
+            $req2->bindValue("id", utf8_decode($id), PDO::PARAM_STR);
+            // exécution de la requête
+            $ok = $req2->execute();
+            return $ok;
+        }
+    }
     
     
     
