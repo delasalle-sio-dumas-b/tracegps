@@ -1171,14 +1171,27 @@ class DAO
     
     public function supprimerUneTrace($id){
         // préparation de la requete de suppression
-        $txt_req = "DELETE from tracegps_traces where id = :id";
-        $req = $this->cnx->prepare($txt_req);
-        // liaison de la requête et de ses paramètres
-        $req->bindValue("id", $id, PDO::PARAM_STR);
-        // exécution de la requete
-        $ok = $req->execute();
-        // fourniture de la réponse
-        return $ok;
+        $txt_req1 = "SELECT COUNT(id) as nb from tracegps_traces where id = :id";
+        $req1 = $this->cnx->prepare($txt_req1);
+        $req1->bindValue("id", $id, PDO::PARAM_STR);
+        $req1->execute();
+        print_r($req1);
+        $uneLigne = $req1->fetch(PDO::FETCH_OBJ);
+        if($uneLigne->nb == 1)
+        {
+            $txt_req2 = "DELETE from tracegps_traces where id = :id";
+            $req2 = $this->cnx->prepare($txt_req2);
+            // liaison de la requête et de ses paramètres
+            $req2->bindValue("id", $id, PDO::PARAM_STR);
+            // exécution de la requete
+            $ok = $req2->execute();
+            // fourniture de la réponse
+            return $ok;
+        }
+        else 
+        {
+            return false;
+        }
     }
     
 } // fin de la classe DAO
