@@ -449,127 +449,193 @@ else {
 
 
 
-// test de la méthode getLesTraces($idUtilisateur) ------------------------------------------------
-// modifié par Jim le 14/8/2018
-echo "<h3>Test de getLesTraces(idUtilisateur) : </h3>";
-$lesTraces = $dao->getLesTraces(2);
-$nbReponses = sizeof($lesTraces);
-echo "<p>Nombre de traces de l'utilisateur 2 : " . $nbReponses . "</p>";
-// affichage des traces
-foreach ($lesTraces as $uneTrace)
-{   echo ($uneTrace->toString());
-echo ('<br>');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// --------------------------------------------------------------------------------------
+// début de la zone attribuée au développeur 4 (DUMAS Benjamin) : lignes 500 à 599
+// --------------------------------------------------------------------------------------
+
+// test de la méthode supprimerUneTrace -----------------------------------------------------------
+// modifié par Jim le 15/8/2018
+echo "<h3>Test de supprimerUneTrace : </h3>";
+$ok = $dao->supprimerUneTrace(89);
+if ($ok) {
+    echo "<p>Trace bien supprimée !</p>";
+}
+else {
+    echo "<p>Echec lors de la suppression de la trace !</p>";
 }
 
+// ferme la connexion à MySQL :
+unset($dao);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// // --------------------------------------------------------------------------------------
-// // début de la zone attribuée au développeur 4 (DUMAS Benjamin) : lignes 500 à 599
-// // --------------------------------------------------------------------------------------
-
-// // test de la méthode supprimerUneTrace -----------------------------------------------------------
-// // modifié par Jim le 15/8/2018
-// echo "<h3>Test de supprimerUneTrace : </h3>";
-// $ok = $dao->supprimerUneTrace(22);
-// if ($ok) {
-//     echo "<p>Trace bien supprimée !</p>";
-// }
-// else {
-//     echo "<p>Echec lors de la suppression de la trace !</p>";
-// }
-
-// // ferme la connexion à MySQL :
-// unset($dao);
 ?>
 
 </body>
