@@ -983,7 +983,34 @@ class DAO
     }
     
     
-    
+    public function creerUnPointDeTrace($unPointDeTrace) {
+
+        $txt_req1 = "insert into tracegps_traces (idTrace, id, longitude, altitude, dateHeure, rythmeCardio)";
+        $txt_req1 .= " values (:idTrace, :id, :longitude, :altitude, :date, :rythme)";
+        $req1 = $this->cnx->prepare($txt_req1);
+     
+        $req1 = $this->cnx->prepare($txt_req1);
+        $req1->bindValue("idTrace", utf8_decode($unPointDeTrace->getIdTrace()), PDO::PARAM_INT);
+        $req1->bindValue("id", utf8_decode($unPointDeTrace->getId()), PDO::PARAM_INT);
+        $req1->bindValue("longitude", utf8_decode($unPointDeTrace->getLongitude()), PDO::PARAM_STR);
+        $req1->bindValue("altitude", utf8_decode($unPointDeTrace->getAltitude()), PDO::PARAM_STR);
+        $req1->bindValue("dateHeure", utf8_decode($unPointDeTrace->getDateHeure()), PDO::PARAM_STR);
+        $req1->bindValue("rythmeCardio", utf8_decode($unPointDeTrace->getRythmeCardio()), PDO::PARAM_INT);
+        
+        $ok = $req1->execute();
+        
+        if (!$ok )return false;
+        
+        if ( $unPointDeTrace->getId() == 1)
+        {
+            $req2 = "update tracegps_traces set dateDebut = :dateHeure";
+            $req2 = $this->cnx->prepare($txt_req2);
+            $req2->bindValue("dateHeure", utf8_decode($unPointDeTrace->getDateHeure()), PDO::PARAM_STR);
+            $ok2 = $req2->execute();
+        
+        }
+        return true;
+    }
 
   
     
