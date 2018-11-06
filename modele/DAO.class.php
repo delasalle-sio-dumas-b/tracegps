@@ -588,26 +588,26 @@ class DAO
     // --------------------------------------------------------------------------------------
     // début de la zone attribuée au développeur 2 (Dylan VALLÉE) : lignes 550 à 749
     // --------------------------------------------------------------------------------------
-    public function existeAdrMailUtilisateur($adr) {
-        // préparation de la requête de recherche
-        $txt_req = "Select count(*) from tracegps_utilisateurs where adrMail = :adr";
-        $req = $this->cnx->prepare($txt_req);
-        // liaison de la requête et de ses paramètres
-        $req->bindValue("adr", $adr, PDO::PARAM_STR);
-        // exécution de la requête
-        $req->execute();
-        $nbReponses = $req->fetchColumn(0);
-        // libère les ressources du jeu de données
-        $req->closeCursor();
+//     public function existeAdrMailUtilisateur($adr) {
+//         // préparation de la requête de recherche
+//         $txt_req = "Select count(*) from tracegps_utilisateurs where adrMail = :adr";
+//         $req = $this->cnx->prepare($txt_req);
+//         // liaison de la requête et de ses paramètres
+//         $req->bindValue("adr", $adr, PDO::PARAM_STR);
+//         // exécution de la requête
+//         $req->execute();
+//         $nbReponses = $req->fetchColumn(0);
+//         // libère les ressources du jeu de données
+//         $req->closeCursor();
 
-        // fourniture de la réponse
-        if ($nbReponses == 0) {
-            return false;
-        }
-        else {
-            return true;
-        }
-    }
+//         // fourniture de la réponse
+//         if ($nbReponses == 0) {
+//             return false;
+//         }
+//         else {
+//             return true;
+//         }
+//     }
 
     public function getLesUtilisateursAutorisant($idAutorise) {
         $txt_req = "SELECT id, pseudo, mdpSha1, adrMail, numTel, niveau, dateCreation, nbTraces, dateDerniereTrace
@@ -620,13 +620,13 @@ class DAO
 
         $req->bindValue("idAut", $idAutorise, PDO::PARAM_INT);
 
+
+
         print_r($req);
         $req->execute();
         $reponses = $req->fetch();
 
 
-        return $reponses;
-    }
 
     public function getLesUtilisateursAutorises($idAutorise) {
         $txt_req = "SELECT id, pseudo, mdpSha1, adrMail, numTel, niveau, dateCreation, nbTraces, dateDerniereTrace
@@ -898,16 +898,39 @@ class DAO
     }
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
+    public function creerUnPointDeTrace($unPointDeTrace) {
+
+        $txt_req1 = "insert into tracegps_points (idTrace, id, latitude, longitude, altitude, dateHeure, rythmeCardio)";
+        $txt_req1 .= " values (:idTrace, :id, :latitude, :longitude, :altitude, :dateHeure, :rythmeCardio)";
+        $req1 = $this->cnx->prepare($txt_req1);
+     
+        $req1 = $this->cnx->prepare($txt_req1);
+        $req1->bindValue("idTrace", utf8_decode($unPointDeTrace->getIdTrace()), PDO::PARAM_INT);
+        $req1->bindValue("id", utf8_decode($unPointDeTrace->getId()), PDO::PARAM_INT);
+        $req1->bindValue("latitude", utf8_decode($unPointDeTrace->getLatitude()), PDO::PARAM_STR);
+        $req1->bindValue("longitude", utf8_decode($unPointDeTrace->getLongitude()), PDO::PARAM_STR);
+        $req1->bindValue("altitude", utf8_decode($unPointDeTrace->getAltitude()), PDO::PARAM_STR);
+        $req1->bindValue("dateHeure", utf8_decode($unPointDeTrace->getDateHeure()), PDO::PARAM_STR);
+        $req1->bindValue("rythmeCardio", utf8_decode($unPointDeTrace->getRythmeCardio()), PDO::PARAM_INT);
         
+        $ok = $req1->execute();
+        
+        if (!$ok )return false;
+        
+        if ( $unPointDeTrace->getId() == 1)
+        {
+            $req2 = "update tracegps_traces set dateDebut = :dateHeure";
+            $req2 = $this->cnx->prepare($txt_req2);
+            $req2->bindValue("dateHeure", utf8_decode($unPointDeTrace->getDateHeure()), PDO::PARAM_STR);
+            $ok2 = $req2->execute();
+        
+        }
+        return true;
+    }
+
+  
+    
+    
     
     
     
