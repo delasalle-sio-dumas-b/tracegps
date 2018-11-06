@@ -586,31 +586,50 @@ else {
 
 // test de la méthode creerUnPointDeTrace ---------------------------------------------------------
 // modifié par Jim le 13/8/2018
-echo "<h3>Test de creerUnPointDeTrace : </h3>";
-// on affiche d'abord le nombre de points (5) de la trace 1
-$lesPoints = $dao->getLesPointsDeTrace(1);
-$nbPoints = sizeof($lesPoints);
-echo "<p>Nombre de points de la trace 1 : " . $nbPoints . "</p>";
-// on crée un sixième point et on l'ajoute à la trace 1
-$unIdTrace = 1;
-$unID = 6;
-$uneLatitude = 48.20;
-$uneLongitude = -1.55;
-$uneAltitude = 50;
-$uneDateHeure = date('Y-m-d H:i:s', time());
-$unRythmeCardio = 80;
-$unTempsCumule = 0;
-$uneDistanceCumulee = 0;
-$uneVitesse = 15;
-$unPoint = new PointDeTrace($unIdTrace, $unID, $uneLatitude, $uneLongitude, $uneAltitude, $uneDateHeure, $unRythmeCardio, $unTempsCumule, $uneDistanceCumulee, $uneVitesse);
-$ok = $dao->creerUnPointDeTrace($unPoint);
-// on affiche à nouveau le nombre de points (6) de la trace 1
-$lesPoints = $dao->getLesPointsDeTrace(1);
-$nbPoints = sizeof($lesPoints);
-echo "<p>Nombre de points de la trace 1 : " . $nbPoints . "</p>";
+// echo "<h3>Test de creerUnPointDeTrace : </h3>";
+// // on affiche d'abord le nombre de points (5) de la trace 1
+// $lesPoints = $dao->getLesPointsDeTrace(1);
+// $nbPoints = sizeof($lesPoints);
+// echo "<p>Nombre de points de la trace 1 : " . $nbPoints . "</p>";
+// // on crée un sixième point et on l'ajoute à la trace 1
+// $unIdTrace = 1;
+// $unID = 6;
+// $uneLatitude = 48.20;
+// $uneLongitude = -1.55;
+// $uneAltitude = 50;
+// $uneDateHeure = date('Y-m-d H:i:s', time());
+// $unRythmeCardio = 80;
+// $unTempsCumule = 0;
+// $uneDistanceCumulee = 0;
+// $uneVitesse = 15;
+// $unPoint = new PointDeTrace($unIdTrace, $unID, $uneLatitude, $uneLongitude, $uneAltitude, $uneDateHeure, $unRythmeCardio, $unTempsCumule, $uneDistanceCumulee, $uneVitesse);
+// $ok = $dao->creerUnPointDeTrace($unPoint);
+// // on affiche à nouveau le nombre de points (6) de la trace 1
+// $lesPoints = $dao->getLesPointsDeTrace(1);
+// $nbPoints = sizeof($lesPoints);
+// echo "<p>Nombre de points de la trace 1 : " . $nbPoints . "</p>";
+// echo ('<br>');
+
+
+// test de la méthode getLesTracesAutorisees($idUtilisateur) --------------------------------------
+// modifié par Jim le 14/8/2018
+echo "<h3>Test de getLesTracesAutorisees(idUtilisateur) : </h3>";
+$lesTraces = $dao->getLesTracesAutorisees(2);
+$nbReponses = sizeof($lesTraces);
+echo "<p>Nombre de traces autorisées à l'utilisateur 2 : " . $nbReponses . "</p>";
+// affichage des traces
+foreach ($lesTraces as $uneTrace)
+{   echo ($uneTrace->toString());
 echo ('<br>');
-
-
+}
+$lesTraces = $dao->getLesTracesAutorisees(3);
+$nbReponses = sizeof($lesTraces);
+echo "<p>Nombre de traces autorisées à l'utilisateur 3 : " . $nbReponses . "</p>";
+// affichage des traces
+foreach ($lesTraces as $uneTrace)
+{   echo ($uneTrace->toString());
+echo ('<br>');
+}
 
 
 
