@@ -338,24 +338,49 @@ echo ('<br>');
 // début de la zone attribuée au développeur 2 (Dylan VALLÉE) : lignes 300 à 399
 
 // test de la méthode existeAdrMailUtilisateur ----------------------------------------------------
-// modifié par Dylan le 12/8/2018
-echo "<h3>Test de existeAdrMailUtilisateur : </h3>";
-if ($dao->existeAdrMailUtilisateur("admin@gmail.com")) $existe = "oui"; else $existe = "non";
-echo "<p>Existence de l'utilisateur 'admin@gmail.com' : <b>" . $existe . "</b><br>";
-if ($dao->existeAdrMailUtilisateur("delasalle.sio.eleves@gmail.com")) $existe = "oui"; else $existe = "non";
-echo "Existence de l'utilisateur 'delasalle.sio.eleves@gmail.com' : <b>" . $existe . "</b></br>";
-
-// // test de la méthode getLesUtilisateursAutorisant ------------------------------------------------
-// // modifié par Jim le 13/8/2018
-echo "<h3>Test de getLesUtilisateursAutorisant(idUtilisateur) : </h3>";
-$lesUtilisateurs = $dao->getLesUtilisateursAutorisant(4);
-$nbReponses = sizeof($lesUtilisateurs);
-echo "<p>Nombre d'utilisateurs autorisant l'utilisateur 4 à voir leurs parcours : " . $nbReponses . "</p>";
-// affichage des utilisateurs
-foreach ($lesUtilisateurs as $unUtilisateur)
-{   echo ($unUtilisateur->toString());
+//// modifié par Dylan le 12/8/2018
+//echo "<h3>Test de existeAdrMailUtilisateur : </h3>";
+//if ($dao->existeAdrMailUtilisateur("admin@gmail.com")) $existe = "oui"; else $existe = "non";
+//echo "<p>Existence de l'utilisateur 'admin@gmail.com' : <b>" . $existe . "</b><br>";
+//if ($dao->existeAdrMailUtilisateur("delasalle.sio.eleves@gmail.com")) $existe = "oui"; else $existe = "non";
+//echo "Existence de l'utilisateur 'delasalle.sio.eleves@gmail.com' : <b>" . $existe . "</b></br>";
+//
+//// test de la méthode getLesUtilisateursAutorisant ------------------------------------------------
+//// modifié par Jim le 13/8/2018
+//echo "<h3>Test de getLesUtilisateursAutorisant(idUtilisateur) : </h3>";
+//$lesUtilisateurs = $dao->getLesUtilisateursAutorisant(4);
+//$nbReponses = sizeof($lesUtilisateurs);
+//echo "<p>Nombre d'utilisateurs autorisant l'utilisateur 4 à voir leurs parcours : " . $nbReponses . "</p>";
+//// affichage des utilisateurs
+//foreach ($lesUtilisateurs as $unUtilisateur)
+//{   echo ($unUtilisateur->toString());
+//    echo ('<br>');
+//}
+//
+//// test de la méthode getLesUtilisateursAutorises -------------------------------------------------
+//// modifié par Jim le 13/8/2018
+//echo "<h3>Test de getLesUtilisateursAutorises(idUtilisateur) : </h3>";
+//$lesUtilisateurs = $dao->getLesUtilisateursAutorises(2);
+//$nbReponses = sizeof($lesUtilisateurs);
+//echo "<p>Nombre d'utilisateurs autorisés par l'utilisateur 2 : " . $nbReponses . "</p>";
+//// affichage des utilisateurs
+//foreach ($lesUtilisateurs as $unUtilisateur)
+//{	echo ($unUtilisateur->toString());
+//    echo ('<br>');
+//}
+//
+//// test de la méthode getLesTraces($idUtilisateur) ------------------------------------------------
+//// modifié par Jim le 14/8/2018
+echo "<h3>Test de getLesTraces(idUtilisateur) : </h3>";
+$lesTraces = $dao->getLesTraces(2);
+$nbReponses = sizeof($lesTraces);
+echo "<p>Nombre de traces de l'utilisateur 2 : " . $nbReponses . "</p>";
+// affichage des traces
+foreach ($lesTraces as $uneTrace)
+{   echo ($uneTrace->toString());
     echo ('<br>');
 }
+
 
 
 
