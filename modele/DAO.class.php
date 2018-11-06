@@ -1001,29 +1001,17 @@ class DAO
     // début de la zone attribuée au développeur 4 (DUMAS Benjamin) : lignes 950 à 1150
     // --------------------------------------------------------------------------------------
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+    public function supprimerUneTrace($id){
+        // préparation de la requete de suppression
+        $txt_req = "DELETE from tracegps_traces where id = :id";
+        $req = $this->cnx->prepare($txt_req);
+        // liaison de la requête et de ses paramètres
+        $req->bindValue("id", $id, PDO::PARAM_STR);
+        // exécution de la requete
+        $ok = $req->execute();
+        // fourniture de la réponse
+        return $ok;
+    }
     
 } // fin de la classe DAO
 
