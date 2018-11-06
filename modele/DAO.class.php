@@ -1045,31 +1045,6 @@ class DAO
     // --------------------------------------------------------------------------------------
     // début de la zone attribuée au développeur 4 (xxxxxxxxxxxxxxxxxxxx) : lignes 950 à 1150
     // --------------------------------------------------------------------------------------
-    
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
 
     public function supprimerUneTrace($id){
         // préparation de la requete de suppression
@@ -1094,10 +1069,7 @@ class DAO
         {
             return false;
         }
-    }
-
-    
+    }    
 } // fin de la classe DAO
-
 // ATTENTION : on ne met pas de balise de fin de script pour ne pas prendre le risque
 // d'enregistrer d'espaces après la balise de fin de script !!!!!!!!!!!!
