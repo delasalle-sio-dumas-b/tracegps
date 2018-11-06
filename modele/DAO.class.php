@@ -1043,7 +1043,7 @@ class DAO
     
    
     // --------------------------------------------------------------------------------------
-    // début de la zone attribuée au développeur 4 (xxxxxxxxxxxxxxxxxxxx) : lignes 950 à 1150
+    // début de la zone attribuée au développeur 4 (DUMAS Benjamin) : lignes 950 à 1150
     // --------------------------------------------------------------------------------------
 
     public function supprimerUneTrace($id){
