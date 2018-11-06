@@ -195,7 +195,7 @@ else {
 
 
 
-
+/*
 
 // --------------------------------------------------------------------------------------
 // début de la zone attribuée au développeur 1 (Leilla) : lignes 200 à 299
@@ -560,7 +560,7 @@ else {
 // test de la méthode supprimerUneTrace -----------------------------------------------------------
 // modifié par Jim le 15/8/2018
 echo "<h3>Test de supprimerUneTrace : </h3>";
-$ok = $dao->supprimerUneTrace(22);
+$ok = $dao->supprimerUneTrace(7);
 if ($ok) {
     echo "<p>Trace bien supprimée !</p>";
 }
