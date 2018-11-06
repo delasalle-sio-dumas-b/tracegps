@@ -197,152 +197,268 @@ else {
 
 
 
-// --------------------------------------------------------------------------------------
-// début de la zone attribuée au développeur 1 (Leilla) : lignes 200 à 299
-// --------------------------------------------------------------------------------------
-// test de la méthode autoriseAConsulter ----------------------------------------------------------
-// modifié par Jim le 13/8/2018
-echo "<h3>Test de autoriseAConsulter : </h3>";
-if ($dao->autoriseAConsulter(2, 3)) $autorise = "oui"; else $autorise = "non";
-echo "<p>L'utilisateur 2 autorise l'utilisateur 3 : <b>" . $autorise . "</b><br>";
-
-if ($dao->autoriseAConsulter(3, 2)) $autorise = "oui"; else $autorise = "non";
-echo "<p>L'utilisateur 3 autorise l'utilisateur 2 : <b>" . $autorise . "</b><br>";
-
-// test de la méthode creerUneAutorisation ---------------------------------------------------------
-// modifié par Jim le 13/8/2018
-echo "<h3>Test de creerUneAutorisation : </h3>";
-if ($dao->creerUneAutorisation(2, 1)) $ok = "oui"; else $ok = "non";
-echo "<p>La création de l'autorisation de l'utilisateur 2 vers l'utilisateur 1 a réussi : <b>" . $ok . "</b><br>";
-// la même autorisation ne peut pas être enregistrée 2 fois
-if ($dao->creerUneAutorisation(2, 1)) $ok = "oui"; else $ok = "non";
-echo "<p>La création de l'autorisation de l'utilisateur 2 vers l'utilisateur 1 a réussi : <b>" . $ok . "</b><br>";
-
-// test de la méthode supprimerUneAutorisation ----------------------------------------------------
-// modifié par Jim le 13/8/2018
-echo "<h3>Test de supprimerUneAutorisation : </h3>";
-// on crée une autorisation
-if ($dao->creerUneAutorisation(2, 1)) $ok = "oui"; else $ok = "non";
-echo "<p>La création de l'autorisation de l'utilisateur 2 vers l'utilisateur 1 a réussi : <b>" . $ok . "</b><br>";
-// puis on la supprime
-if ($dao->supprimerUneAutorisation(2, 1)) $ok = "oui"; else $ok = "non";
-echo "<p>La suppression de l'autorisation de l'utilisateur 2 vers l'utilisateur 1 a réussi : <b>" . $ok . "</b><br>";
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// début de la zone attribuée au développeur 2 (Dylan VALLÉE) : lignes 300 à 399
-
-// test de la méthode existeAdrMailUtilisateur ----------------------------------------------------
-// modifié par Dylan le 12/8/2018
-echo "<h3>Test de existeAdrMailUtilisateur : </h3>";
-if ($dao->existeAdrMailUtilisateur("admin@gmail.com")) $existe = "oui"; else $existe = "non";
-echo "<p>Existence de l'utilisateur 'admin@gmail.com' : <b>" . $existe . "</b><br>";
-if ($dao->existeAdrMailUtilisateur("delasalle.sio.eleves@gmail.com")) $existe = "oui"; else $existe = "non";
-echo "Existence de l'utilisateur 'delasalle.sio.eleves@gmail.com' : <b>" . $existe . "</b></br>";
-
-// // test de la méthode getLesUtilisateursAutorisant ------------------------------------------------
+// // --------------------------------------------------------------------------------------
+// // début de la zone attribuée au développeur 1 (Leilla) : lignes 200 à 299
+// // --------------------------------------------------------------------------------------
+// // test de la méthode autoriseAConsulter ----------------------------------------------------------
 // // modifié par Jim le 13/8/2018
-echo "<h3>Test de getLesUtilisateursAutorisant(idUtilisateur) : </h3>";
-$lesUtilisateurs = $dao->getLesUtilisateursAutorisant(4);
-$nbReponses = sizeof($lesUtilisateurs);
-echo "<p>Nombre d'utilisateurs autorisant l'utilisateur 4 à voir leurs parcours : " . $nbReponses . "</p>";
-// affichage des utilisateurs
-foreach ($lesUtilisateurs as $unUtilisateur)
-{   echo ($unUtilisateur->toString());
-    echo ('<br>');
+// echo "<h3>Test de autoriseAConsulter : </h3>";
+// if ($dao->autoriseAConsulter(2, 3)) $autorise = "oui"; else $autorise = "non";
+// echo "<p>L'utilisateur 2 autorise l'utilisateur 3 : <b>" . $autorise . "</b><br>";
+
+// if ($dao->autoriseAConsulter(3, 2)) $autorise = "oui"; else $autorise = "non";
+// echo "<p>L'utilisateur 3 autorise l'utilisateur 2 : <b>" . $autorise . "</b><br>";
+
+// // test de la méthode creerUneAutorisation ---------------------------------------------------------
+// // modifié par Jim le 13/8/2018
+// echo "<h3>Test de creerUneAutorisation : </h3>";
+// if ($dao->creerUneAutorisation(2, 1)) $ok = "oui"; else $ok = "non";
+// echo "<p>La création de l'autorisation de l'utilisateur 2 vers l'utilisateur 1 a réussi : <b>" . $ok . "</b><br>";
+// // la même autorisation ne peut pas être enregistrée 2 fois
+// if ($dao->creerUneAutorisation(2, 1)) $ok = "oui"; else $ok = "non";
+// echo "<p>La création de l'autorisation de l'utilisateur 2 vers l'utilisateur 1 a réussi : <b>" . $ok . "</b><br>";
+
+// // test de la méthode supprimerUneAutorisation ----------------------------------------------------
+// // modifié par Jim le 13/8/2018
+// echo "<h3>Test de supprimerUneAutorisation : </h3>";
+// // on crée une autorisation
+// if ($dao->creerUneAutorisation(2, 1)) $ok = "oui"; else $ok = "non";
+// echo "<p>La création de l'autorisation de l'utilisateur 2 vers l'utilisateur 1 a réussi : <b>" . $ok . "</b><br>";
+// // puis on la supprime
+// if ($dao->supprimerUneAutorisation(2, 1)) $ok = "oui"; else $ok = "non";
+// echo "<p>La suppression de l'autorisation de l'utilisateur 2 vers l'utilisateur 1 a réussi : <b>" . $ok . "</b><br>";
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// // début de la zone attribuée au développeur 2 (Dylan VALLÉE) : lignes 300 à 399
+
+// // test de la méthode existeAdrMailUtilisateur ----------------------------------------------------
+// // modifié par Dylan le 12/8/2018
+// echo "<h3>Test de existeAdrMailUtilisateur : </h3>";
+// if ($dao->existeAdrMailUtilisateur("admin@gmail.com")) $existe = "oui"; else $existe = "non";
+// echo "<p>Existence de l'utilisateur 'admin@gmail.com' : <b>" . $existe . "</b><br>";
+// if ($dao->existeAdrMailUtilisateur("delasalle.sio.eleves@gmail.com")) $existe = "oui"; else $existe = "non";
+// echo "Existence de l'utilisateur 'delasalle.sio.eleves@gmail.com' : <b>" . $existe . "</b></br>";
+
+// // // test de la méthode getLesUtilisateursAutorisant ------------------------------------------------
+// // // modifié par Jim le 13/8/2018
+// echo "<h3>Test de getLesUtilisateursAutorisant(idUtilisateur) : </h3>";
+// $lesUtilisateurs = $dao->getLesUtilisateursAutorisant(4);
+// $nbReponses = sizeof($lesUtilisateurs);
+// echo "<p>Nombre d'utilisateurs autorisant l'utilisateur 4 à voir leurs parcours : " . $nbReponses . "</p>";
+// // affichage des utilisateurs
+// foreach ($lesUtilisateurs as $unUtilisateur)
+// {   echo ($unUtilisateur->toString());
+//     echo ('<br>');
+// }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// // début de la zone attribuée au développeur 3 (LE SAINT) : lignes 400 à 499
+// // test de la méthode creerUneTrace ----------------------------------------------------------
+// // modifié par LE SAINT 16/10/18
+
+// echo "<h3>Test de creerUneTrace : </h3>";
+// $trace1 = new Trace(0, "2017-12-18 14:00:00", "2017-12-18 14:10:00", true, 3);
+// $ok = $dao->creerUneTrace($trace1);
+// if ($ok) {
+//     echo "<p>Trace bien enregistrée !</p>";
+//     echo $trace1->toString();
+// }
+// else {
+//     echo "<p>Echec lors de l'enregistrement de la trace !</p>";
+// }
+// $trace2 = new Trace(0, date('Y-m-d H:i:s', time()), null, false, 3);
+// $ok = $dao->creerUneTrace($trace2);
+// if ($ok) {
+//     echo "<p>Trace bien enregistrée !</p>";
+//     echo $trace2->toString();
+// }
+// else {
+//     echo "<p>Echec lors de l'enregistrement de la trace !</p>";
+// }
+
+
+
+// test de la méthode getLesTraces($idUtilisateur) ------------------------------------------------
+// modifié par Jim le 14/8/2018
+echo "<h3>Test de getLesTraces(idUtilisateur) : </h3>";
+$lesTraces = $dao->getLesTraces(2);
+$nbReponses = sizeof($lesTraces);
+echo "<p>Nombre de traces de l'utilisateur 2 : " . $nbReponses . "</p>";
+// affichage des traces
+foreach ($lesTraces as $uneTrace)
+{   echo ($uneTrace->toString());
+echo ('<br>');
 }
 
 
@@ -423,30 +539,6 @@ foreach ($lesUtilisateurs as $unUtilisateur)
 
 
 
-// début de la zone attribuée au développeur 3 (LE SAINT) : lignes 400 à 499
-// test de la méthode creerUneTrace ----------------------------------------------------------
-// modifié par LE SAINT 16/10/18
-/*
-echo "<h3>Test de creerUneTrace : </h3>";
-$trace1 = new Trace(0, "2017-12-18 14:00:00", "2017-12-18 14:10:00", true, 3);
-$ok = $dao->creerUneTrace($trace1);
-if ($ok) {
-    echo "<p>Trace bien enregistrée !</p>";
-    echo $trace1->toString();
-}
-else {
-    echo "<p>Echec lors de l'enregistrement de la trace !</p>";
-}
-$trace2 = new Trace(0, date('Y-m-d H:i:s', time()), null, false, 3);
-$ok = $dao->creerUneTrace($trace2);
-if ($ok) {
-    echo "<p>Trace bien enregistrée !</p>";
-    echo $trace2->toString();
-}
-else {
-    echo "<p>Echec lors de l'enregistrement de la trace !</p>";
-}
-*/
 
 
 
@@ -461,103 +553,23 @@ else {
 
 
 
+// // --------------------------------------------------------------------------------------
+// // début de la zone attribuée au développeur 4 (DUMAS Benjamin) : lignes 500 à 599
+// // --------------------------------------------------------------------------------------
 
+// // test de la méthode supprimerUneTrace -----------------------------------------------------------
+// // modifié par Jim le 15/8/2018
+// echo "<h3>Test de supprimerUneTrace : </h3>";
+// $ok = $dao->supprimerUneTrace(22);
+// if ($ok) {
+//     echo "<p>Trace bien supprimée !</p>";
+// }
+// else {
+//     echo "<p>Echec lors de la suppression de la trace !</p>";
+// }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// --------------------------------------------------------------------------------------
-// début de la zone attribuée au développeur 4 (DUMAS Benjamin) : lignes 500 à 599
-// --------------------------------------------------------------------------------------
-
-// test de la méthode supprimerUneTrace -----------------------------------------------------------
-// modifié par Jim le 15/8/2018
-echo "<h3>Test de supprimerUneTrace : </h3>";
-$ok = $dao->supprimerUneTrace(22);
-if ($ok) {
-    echo "<p>Trace bien supprimée !</p>";
-}
-else {
-    echo "<p>Echec lors de la suppression de la trace !</p>";
-}
-
-// ferme la connexion à MySQL :
-unset($dao);
+// // ferme la connexion à MySQL :
+// unset($dao);
 ?>
 
 </body>
