@@ -202,34 +202,34 @@ else {
 // // --------------------------------------------------------------------------------------
 // // test de la méthode autoriseAConsulter ----------------------------------------------------------
 
-if ($dao->autoriseAConsulter(3, 2)) $autorise = "oui"; else $autorise = "non";
-echo "<p>L'utilisateur 3 autorise l'utilisateur 2 : <b>" . $autorise . "</b><br>";
+// if ($dao->autoriseAConsulter(3, 2)) $autorise = "oui"; else $autorise = "non";
+// echo "<p>L'utilisateur 3 autorise l'utilisateur 2 : <b>" . $autorise . "</b><br>";
 
-// test de la méthode creerUneAutorisation ---------------------------------------------------------
-// modifié par Jim le 13/8/2018
-echo "<h3>Test de creerUneAutorisation : </h3>";
+// // test de la méthode creerUneAutorisation ---------------------------------------------------------
+// // modifié par Jim le 13/8/2018
+// echo "<h3>Test de creerUneAutorisation : </h3>";
 
-// test de la méthode supprimerUneAutorisation ----------------------------------------------------
-// modifié par Jim le 13/8/2018
-echo "<h3>Test de supprimerUneAutorisation : </h3>";
-// on crée une autorisation
-if ($dao->creerUneAutorisation(2, 1)) $ok = "oui"; else $ok = "non";
-echo "<p>La création de l'autorisation de l'utilisateur 2 vers l'utilisateur 1 a réussi : <b>" . $ok . "</b><br>";
-// puis on la supprime
-if ($dao->supprimerUneAutorisation(2, 1)) $ok = "oui"; else $ok = "non";
-echo "<p>La suppression de l'autorisation de l'utilisateur 2 vers l'utilisateur 1 a réussi : <b>" . $ok . "</b><br>";
+// // test de la méthode supprimerUneAutorisation ----------------------------------------------------
+// // modifié par Jim le 13/8/2018
+// echo "<h3>Test de supprimerUneAutorisation : </h3>";
+// // on crée une autorisation
+// if ($dao->creerUneAutorisation(2, 1)) $ok = "oui"; else $ok = "non";
+// echo "<p>La création de l'autorisation de l'utilisateur 2 vers l'utilisateur 1 a réussi : <b>" . $ok . "</b><br>";
+// // puis on la supprime
+// if ($dao->supprimerUneAutorisation(2, 1)) $ok = "oui"; else $ok = "non";
+// echo "<p>La suppression de l'autorisation de l'utilisateur 2 vers l'utilisateur 1 a réussi : <b>" . $ok . "</b><br>";
 
-// test de la méthode getLesPointsDeTrace ---------------------------------------------------------
-// modifié par Jim le 13/8/2018
-echo "<h3>Test de getLesPointsDeTrace : </h3>";
-$lesPoints = $dao->getLesPointsDeTrace(1);
-$nbPoints = sizeof($lesPoints);
-echo "<p>Nombre de points de la trace 1 : " . $nbPoints . "</p>";
-// affichage des points
-foreach ($lesPoints as $unPoint)
-{   echo ($unPoint->toString());
-echo ('<br>');
-}
+// // test de la méthode getLesPointsDeTrace ---------------------------------------------------------
+// // modifié par Jim le 13/8/2018
+// echo "<h3>Test de getLesPointsDeTrace : </h3>";
+// $lesPoints = $dao->getLesPointsDeTrace(1);
+// $nbPoints = sizeof($lesPoints);
+// echo "<p>Nombre de points de la trace 1 : " . $nbPoints . "</p>";
+// // affichage des points
+// foreach ($lesPoints as $unPoint)
+// {   echo ($unPoint->toString());
+// echo ('<br>');
+// }
 
 
 
@@ -330,11 +330,11 @@ echo ('<br>');
 
 // test de la méthode existeAdrMailUtilisateur ----------------------------------------------------
 // modifié par Dylan le 12/8/2018
-echo "<h3>Test de existeAdrMailUtilisateur : </h3>";
-if ($dao->existeAdrMailUtilisateur("admin@gmail.com")) $existe = "oui"; else $existe = "non";
-echo "<p>Existence de l'utilisateur 'admin@gmail.com' : <b>" . $existe . "</b><br>";
-if ($dao->existeAdrMailUtilisateur("delasalle.sio.eleves@gmail.com")) $existe = "oui"; else $existe = "non";
-echo "Existence de l'utilisateur 'delasalle.sio.eleves@gmail.com' : <b>" . $existe . "</b></br>";
+// echo "<h3>Test de existeAdrMailUtilisateur : </h3>";
+// if ($dao->existeAdrMailUtilisateur("admin@gmail.com")) $existe = "oui"; else $existe = "non";
+// echo "<p>Existence de l'utilisateur 'admin@gmail.com' : <b>" . $existe . "</b><br>";
+// if ($dao->existeAdrMailUtilisateur("delasalle.sio.eleves@gmail.com")) $existe = "oui"; else $existe = "non";
+// echo "Existence de l'utilisateur 'delasalle.sio.eleves@gmail.com' : <b>" . $existe . "</b></br>";
 
 // // test de la méthode getLesUtilisateursAutorisant ------------------------------------------------
 
@@ -786,17 +786,17 @@ echo ('<br>');
 
 // test de la méthode supprimerUneTrace -----------------------------------------------------------
 // modifié par Jim le 15/8/2018
-echo "<h3>Test de supprimerUneTrace : </h3>";
-$ok = $dao->supprimerUneTrace(7);
-if ($ok) {
-    echo "<p>Trace bien supprimée !</p>";
-}
-else {
-    echo "<p>Echec lors de la suppression de la trace !</p>";
-}
+// echo "<h3>Test de supprimerUneTrace : </h3>";
+// $ok = $dao->supprimerUneTrace(7);
+// if ($ok) {
+//     echo "<p>Trace bien supprimée !</p>";
+// }
+// else {
+//     echo "<p>Echec lors de la suppression de la trace !</p>";
+// }
 
-// ferme la connexion à MySQL :
-unset($dao);
+// // ferme la connexion à MySQL :
+// unset($dao);
 
 ?>
 
