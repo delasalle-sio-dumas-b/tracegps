@@ -276,7 +276,7 @@ class Trace
     }
 
 
-    public function ajouterPoint($unPoint)
+    public function ajouterPoint(PointDeTrace $unPoint)
     {
         if ($this->getNombrePoints() == 0) {
             $unPoint->setDistanceCumulee(0);
