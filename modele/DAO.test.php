@@ -441,6 +441,31 @@ else {
 
 
 
+// début de la zone attribuée au développeur 3 (LE SAINT) : lignes 400 à 499
+// test de la méthode creerUneTrace ----------------------------------------------------------
+// modifié par LE SAINT 16/10/18
+/*
+echo "<h3>Test de creerUneTrace : </h3>";
+$trace1 = new Trace(0, "2017-12-18 14:00:00", "2017-12-18 14:10:00", true, 3);
+$ok = $dao->creerUneTrace($trace1);
+if ($ok) {
+    echo "<p>Trace bien enregistrée !</p>";
+    echo $trace1->toString();
+}
+else {
+    echo "<p>Echec lors de l'enregistrement de la trace !</p>";
+}
+$trace2 = new Trace(0, date('Y-m-d H:i:s', time()), null, false, 3);
+$ok = $dao->creerUneTrace($trace2);
+if ($ok) {
+    echo "<p>Trace bien enregistrée !</p>";
+    echo $trace2->toString();
+}
+else {
+    echo "<p>Echec lors de l'enregistrement de la trace !</p>";
+}
+*/
+
 
 
 
@@ -816,6 +841,25 @@ echo ('<br>');
 
 // // ferme la connexion à MySQL :
 // unset($dao);
+
+echo "<h3>Test de getToutesLesTraces : </h3>";
+$lesTraces = $dao->getToutesLesTraces();
+$nbReponses = sizeof($lesTraces);
+echo "<p>Nombre de traces : " . $nbReponses . "</p>";
+// affichage des traces
+foreach ($lesTraces as $uneTrace)
+{   echo ($uneTrace->toString());
+echo ('<br>');
+}
+
+echo "<h3>Test de supprimerUneTrace : </h3>";
+$ok = $dao->supprimerUneTrace(7);
+if ($ok) {
+    echo "<p>Trace bien supprimée !</p>";
+}
+else {
+    echo "<p>Echec lors de la suppression de la trace !</p>";
+}
 
 ?>
 
