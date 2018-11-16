@@ -842,6 +842,25 @@ echo ('<br>');
 // // ferme la connexion à MySQL :
 // unset($dao);
 
+echo "<h3>Test de getToutesLesTraces : </h3>";
+$lesTraces = $dao->getToutesLesTraces();
+$nbReponses = sizeof($lesTraces);
+echo "<p>Nombre de traces : " . $nbReponses . "</p>";
+// affichage des traces
+foreach ($lesTraces as $uneTrace)
+{   echo ($uneTrace->toString());
+echo ('<br>');
+}
+
+echo "<h3>Test de supprimerUneTrace : </h3>";
+$ok = $dao->supprimerUneTrace(7);
+if ($ok) {
+    echo "<p>Trace bien supprimée !</p>";
+}
+else {
+    echo "<p>Echec lors de la suppression de la trace !</p>";
+}
+
 ?>
 
 </body>

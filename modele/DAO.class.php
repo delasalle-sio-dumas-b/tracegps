@@ -625,6 +625,7 @@ class DAO
         print_r($req);
         $req->execute();
         $reponses = $req->fetch();
+    }
 
 
 
@@ -1159,6 +1160,46 @@ class DAO
     // début de la zone attribuée au développeur 4 (DUMAS Benjamin) : lignes 950 à 1150
     // --------------------------------------------------------------------------------------
 
+    public function getToutesLesTraces() {
+        // préparation de la requête de recherche
+        $txt_req = "Select id, idUtilisateur, dateDebut, terminee, nbPoints, dateFin, latitude, longitude, altitude";
+        $txt_req .= "from tracegps_vue_traces, tracegps_points, tracegps_traces";
+        $txt_req .= "where tracegps_vue_traces.id = tracegps_traces.id";
+        $txt_req .= "and tracegps_points.idTrace = tracegps_traces.id";
+        $txt_req .= "order by id";
+        
+        $req = $this->cnx->prepare($txt_req);
+        // extraction des données
+        $req->execute();
+        $uneLigne = $req->fetch(PDO::FETCH_OBJ);
+        
+        // construction d'une collection d'objets Utilisateur
+        $lesTraces = array();
+        // tant qu'une ligne est trouvée :
+        while ($uneLigne) {
+            // création d'un objet Utilisateur
+            $unId = utf8_encode($uneLigne->id);
+            $unPseudo = utf8_encode($uneLigne->idUtilisateur);
+            $unMdpSha1 = utf8_encode($uneLigne->dateDebut);
+            $uneAdrMail = utf8_encode($uneLigne->terminee);
+            $unNumTel = utf8_encode($uneLigne->nbPoints);
+            $unNiveau = utf8_encode($uneLigne->dateFin);
+            $uneDateCreation = utf8_encode($uneLigne->latitude);
+            $unLongitude = utf8_encode($uneLigne->longitude);
+            $uneAltitude = utf8_encode($uneLigne->altitude);
+            
+            $unUtilisateur = new Utilisateur($unId, $unPseudo, $unMdpSha1, $uneAdrMail, $unNumTel, $unNiveau, $uneDateCreation, $unNbTraces, $uneDateDerniereTrace);
+            // ajout de l'utilisateur à la collection
+            $lesTraces[] = $unUtilisateur;
+            // extrait la ligne suivante
+            $uneLigne = $req->fetch(PDO::FETCH_OBJ);
+        }
+        // libère les ressources du jeu de données
+        $req->closeCursor();
+        // fourniture de la collection
+        return $lesTraces;
+    }
+    
     public function supprimerUneTrace($id){
         // préparation de la requete de suppression
         $txt_req1 = "SELECT COUNT(id) as nb from tracegps_traces where id = :id";
