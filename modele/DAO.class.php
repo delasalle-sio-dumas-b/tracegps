@@ -452,6 +452,51 @@ class DAO
         return $lesPointDeTraces;
     }
     
+    // fournit un objet Trace à partir de son identifiant $idTrace
+    //Paramètres à fournir :$idTrace ==> l'identifiant de la trace
+    //Valeur de retour : un objet
+    //un objet de la classe Trace si $idTrace existe
+    //l'objet null si $idTrace n'existe pas
+    public function getUneTrace($idTrace) {
+        // préparation de la requête de recherche
+        $txt_req = "Select id, dateDebut, dateFin, terminee, idUtilisateur";
+        $txt_req = $txt_req . " from tracegps_traces";
+        $txt_req = $txt_req . " where id = :idTrace";
+        
+        $req = $this->cnx->prepare($txt_req);
+        // liaison de la requête et de ses paramètres
+        $req->bindValue(":idTrace", $idTrace, PDO::PARAM_INT);
+        // extraction des données
+        $req->execute();
+        $uneLigne = $req->fetch(PDO::FETCH_OBJ);
+        // libère les ressources du jeu de données
+        $req->closeCursor();
+        
+        // traitement de la réponse
+        if ( ! $uneLigne) {
+            return null;
+        }
+        else {
+            // création d'un objet Trace
+            $unId = utf8_encode($uneLigne->id);
+            $uneDateHeureDebut = utf8_encode($uneLigne->dateDebut);
+            $uneDateHeureFin = utf8_encode($uneLigne->dateFin);
+            $terminee = utf8_encode($uneLigne->terminee);
+            $unIdUtilisateur = utf8_encode($uneLigne->idUtilisateur);
+            
+            $uneTrace = new Trace($unId, $uneDateHeureDebut, $uneDateHeureFin, $terminee, $unIdUtilisateur);
+            
+            //pour obtenir les points de la trace et les ajouter à l'objet Trace qui sera retourné
+            $lesPointsDeTrace = $this->getLesPointsDeTrace($idTrace);
+            foreach ($lesPointsDeTrace as $unPoint) {
+                $uneTrace->ajouterPoint($unPoint);
+            }
+            return $uneTrace;
+        }
+    }
+    
+    
+    
     
     
     
