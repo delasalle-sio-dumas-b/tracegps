@@ -1207,7 +1207,7 @@ class DAO
 
     public function getToutesLesTraces() {
         // préparation de la requête de recherche
-        $txt_req = "Select id, idUtilisateur, dateDebut, terminee, nbPoints, dateFin, latitude, longitude, altitude";
+        $txt_req = "Select id, idUtilisateur, dateDebut, terminee, nbPoints, dateFin, latitude, longitude, altitude, pseudo";
         $txt_req .= "from tracegps_vue_traces, tracegps_points, tracegps_traces";
         $txt_req .= "where tracegps_vue_traces.id = tracegps_traces.id";
         $txt_req .= "and tracegps_points.idTrace = tracegps_traces.id";
@@ -1223,17 +1223,18 @@ class DAO
         // tant qu'une ligne est trouvée :
         while ($uneLigne) {
             // création d'un objet Utilisateur
-            $unId = utf8_encode($uneLigne->id);
-            $unPseudo = utf8_encode($uneLigne->idUtilisateur);
-            $unMdpSha1 = utf8_encode($uneLigne->dateDebut);
-            $uneAdrMail = utf8_encode($uneLigne->terminee);
-            $unNumTel = utf8_encode($uneLigne->nbPoints);
-            $unNiveau = utf8_encode($uneLigne->dateFin);
-            $uneDateCreation = utf8_encode($uneLigne->latitude);
-            $unLongitude = utf8_encode($uneLigne->longitude);
-            $uneAltitude = utf8_encode($uneLigne->altitude);
+            $id = utf8_encode($uneLigne->id);
+            $idUtilisateur = utf8_encode($uneLigne->idUtilisateur);
+            $dateDebut = utf8_encode($uneLigne->dateDebut);
+            $terminee = utf8_encode($uneLigne->terminee);
+            $nbPoints = utf8_encode($uneLigne->nbPoints);
+            $dateFin = utf8_encode($uneLigne->dateFin);
+            $latitude = utf8_encode($uneLigne->latitude);
+            $longitude = utf8_encode($uneLigne->longitude);
+            $altitude = utf8_encode($uneLigne->altitude);
+            $pseudo = utf8_encore($uneLigne->pseudo);
             
-            $unUtilisateur = new Utilisateur($unId, $unPseudo, $unMdpSha1, $uneAdrMail, $unNumTel, $unNiveau, $uneDateCreation, $unNbTraces, $uneDateDerniereTrace);
+            $unUtilisateur = new Utilisateur($id, $idUtilisateur, $dateDebut, $terminee, $nbPoints, $dateFin, $latitude, $longitude, $altitude, $pseudo);
             // ajout de l'utilisateur à la collection
             $lesTraces[] = $unUtilisateur;
             // extrait la ligne suivante
