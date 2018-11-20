@@ -847,18 +847,23 @@ echo ('<br>');
 // --------------------------------------------------------------------------------------
 
 // test de la méthode supprimerUneTrace -----------------------------------------------------------
-// modifié par Jim le 15/8/2018
-// echo "<h3>Test de supprimerUneTrace : </h3>";
-// $ok = $dao->supprimerUneTrace(7);
-// if ($ok) {
-//     echo "<p>Trace bien supprimée !</p>";
-// }
-// else {
-//     echo "<p>Echec lors de la suppression de la trace !</p>";
-// }
+ //modifié par Jim le 15/8/2018
+ /*
+ echo "<h3>Test de supprimerUneTrace : </h3>";
+ $ok = $dao->supprimerUneTrace(7);
+ if ($ok) {
+     echo "<p>Trace bien supprimée !</p>";
+ }
+ else {
+     echo "<p>Echec lors de la suppression de la trace !</p>";
+ }
 
-// // ferme la connexion à MySQL :
-// unset($dao);
+//ferme la connexion à MySQL :
+ unset($dao);
+*/
+ 
+ 
+ 
 
 echo "<h3>Test de getToutesLesTraces : </h3>";
 $lesTraces = $dao->getToutesLesTraces();
@@ -869,7 +874,7 @@ foreach ($lesTraces as $uneTrace)
 {   echo ($uneTrace->toString());
 echo ('<br>');
 }
-
+/*
 echo "<h3>Test de supprimerUneTrace : </h3>";
 if ($ok) {
     echo "<p>Trace bien supprimée !</p>";
@@ -877,7 +882,7 @@ if ($ok) {
 else {
     echo "<p>Echec lors de la suppression de la trace !</p>";
 }
-
+*/
 ?>
 
 </body>

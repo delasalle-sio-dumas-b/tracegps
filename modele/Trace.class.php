@@ -149,7 +149,7 @@ class Trace
 
             $centre = new Point(0, 0, 0);
 
-            for ($i = 0; $i < sizeof($this->lesPointsDeTrace) - 1; $i++) {
+            for ($i = 0; $i <= sizeof($this->lesPointsDeTrace) - 1; $i++) {
                 $lePoint = $this->lesPointsDeTrace[$i];
 
                 if ($lePoint->getLatitude() <= $latitudeMin)
@@ -185,7 +185,7 @@ class Trace
             $altitudeMax = $premierPoint->getAltitude();
             $ecart = 0;
 
-            for ($i = 0; $i < sizeof($this->lesPointsDeTrace) - 1; $i++) {
+            for ($i = 0; $i <= sizeof($this->lesPointsDeTrace) - 1; $i++) {
                 $lePoint = $this->lesPointsDeTrace[$i];
 
                 if ($lePoint->getAltitude() <= $altitudeMin) {

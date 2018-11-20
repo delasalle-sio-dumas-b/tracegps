@@ -1209,7 +1209,7 @@ class DAO
 
     public function getToutesLesTraces() {
         // préparation de la requête de recherche
-        $txt_req = "Select * from tracegps_vue_traces";
+        $txt_req = "Select * from tracegps_vue_traces order by id";
 
         
         $req = $this->cnx->prepare($txt_req);
@@ -1222,14 +1222,19 @@ class DAO
         // tant qu'une ligne est trouvée :
         while ($uneLigne) {
             // création d'un objet Utilisateur
-            $id = utf8_encode($uneLigne->id);
-            $idUtilisateur = utf8_encode($uneLigne->idUtilisateur);
-            $dateDebut = utf8_encode($uneLigne->dateDebut);
-            $terminee = utf8_encode($uneLigne->terminee);
-            $nbPoints = utf8_encode($uneLigne->nbPoints);
-            $dateFin = utf8_encode($uneLigne->dateFin);
+            $id = ($uneLigne->id);
+            $dateDebut = ($uneLigne->dateDebut);
+            $idUtilisateur = ($uneLigne->idUtilisateur);
+
+            $terminee = ($uneLigne->terminee);
+            $dateFin = ($uneLigne->dateFin);
   
-            $uneTrace = new Trace($id, $idUtilisateur, $dateDebut, $terminee, $nbPoints, $dateFin);
+            $uneTrace = new Trace($id, $dateDebut, $dateFin, $terminee, $idUtilisateur);
+            
+            $lesPoints = $this->getLesPointsDeTrace($id);
+            foreach ($lesPoints as $unPoint) {
+                $uneTrace->ajouterPoint($unPoint);
+            }
             
             // ajout de l'utilisateur à la collection
             $lesTraces[] = $uneTrace;
@@ -1241,7 +1246,7 @@ class DAO
         // fourniture de la collection
         return $lesTraces;
     }
-    
+    /*
     public function supprimerUneTrace($id){ 
         // préparation de la requete de suppression
         $txt_req1 = "SELECT COUNT(id) as nb from tracegps_traces where id = :id";
@@ -1265,7 +1270,7 @@ class DAO
         {
             return false;
         }
-    }    
+    }*/    
 } // fin de la classe DAO
 // ATTENTION : on ne met pas de balise de fin de script pour ne pas prendre le risque
 // d'enregistrer d'espaces après la balise de fin de script !!!!!!!!!!!!
