@@ -1248,7 +1248,7 @@ class DAO
         return $lesTraces;
     }
     
-    public function supprimerUneTrace($id){
+    public function supprimerUneTrace($id){ 
         // préparation de la requete de suppression
         $txt_req1 = "SELECT COUNT(id) as nb from tracegps_traces where id = :id";
         $req1 = $this->cnx->prepare($txt_req1);
