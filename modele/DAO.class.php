@@ -459,7 +459,7 @@ class DAO
         // fourniture de la collection
         return $lesPointDeTraces;
     }
-    
+
     // fournit un objet Trace à partir de son identifiant $idTrace
     //Paramètres à fournir :$idTrace ==> l'identifiant de la trace
     //Valeur de retour : un objet
@@ -467,10 +467,10 @@ class DAO
     //l'objet null si $idTrace n'existe pas
     public function getUneTrace($idTrace) {
         // préparation de la requête de recherche
-        $txt_req = "Select id, dateDebut, dateFin, terminee, idUtilisateur";
-        $txt_req = $txt_req . " from tracegps_traces";
-        $txt_req = $txt_req . " where id = :idTrace";
-        
+        $txt_req = "SELECT *";
+        $txt_req = $txt_req . " FROM tracegps_traces";
+        $txt_req = $txt_req . " WHERE id = :idTrace";
+
         $req = $this->cnx->prepare($txt_req);
         // liaison de la requête et de ses paramètres
         $req->bindValue(":idTrace", $idTrace, PDO::PARAM_INT);
@@ -479,7 +479,7 @@ class DAO
         $uneLigne = $req->fetch(PDO::FETCH_OBJ);
         // libère les ressources du jeu de données
         $req->closeCursor();
-        
+
         // traitement de la réponse
         if ( ! $uneLigne) {
             return null;
@@ -491,9 +491,9 @@ class DAO
             $uneDateHeureFin = utf8_encode($uneLigne->dateFin);
             $terminee = utf8_encode($uneLigne->terminee);
             $unIdUtilisateur = utf8_encode($uneLigne->idUtilisateur);
-            
+
             $uneTrace = new Trace($unId, $uneDateHeureDebut, $uneDateHeureFin, $terminee, $unIdUtilisateur);
-            
+
             //pour obtenir les points de la trace et les ajouter à l'objet Trace qui sera retourné
             $lesPointsDeTrace = $this->getLesPointsDeTrace($idTrace);
             foreach ($lesPointsDeTrace as $unPoint) {
@@ -502,141 +502,141 @@ class DAO
             return $uneTrace;
         }
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -856,11 +856,41 @@ class DAO
     public function getLesTraces($idUtilisateur) {
         $txt_req = "SELECT * 
                     FROM tracegps_traces
-                    WHERE idUtilisateur = :id";
+                    WHERE idUtilisateur = :idUser";
 
         $req = $this->cnx->prepare($txt_req);
-        $req->bindValue("id", $idUtilisateur, PDO::PARAM_INT);
+        $req->bindValue("idUser", $idUtilisateur, PDO::PARAM_INT);
         $req->execute();
+
+        $uneLigne = $req->fetch(PDO::FETCH_OBJ);
+
+        // construction d'une collection d'objets Trace
+        $lesTraces = array();
+        // tant qu'une ligne est trouvée :
+        while ($uneLigne) {
+            // création d'un objet Trace
+            $unId = utf8_encode($uneLigne->id);
+            $uneDateDebut = utf8_encode($uneLigne->dateDebut);
+            $uneDateFin = utf8_encode($uneLigne->dateFin);
+            $terminee = utf8_encode($uneLigne->terminee);
+            $unIdUtilisateur = utf8_encode($uneLigne->idUtilisateur);
+
+            $uneTrace = new Trace($unId, $uneDateDebut, $uneDateFin, $terminee, $unIdUtilisateur);
+
+            
+
+            $lesPointsDeTrace = $this->getLesPointsDeTrace($unId);
+            foreach ($lesPointsDeTrace as $unPoint) {
+                $uneTrace->ajouterPoint($unPoint);
+            }
+
+            // ajout de l'utilisateur à la collection
+            $lesTraces[] = $uneTrace;
+            // extrait la ligne suivante
+            $uneLigne = $req->fetch(PDO::FETCH_OBJ);
+        }
+
+        return $lesTraces;
     }
 
 
@@ -1141,12 +1171,12 @@ class DAO
             $unIdUtilisateur = utf8_encode($uneLigne->idUtilisateur);
 
             $uneTrace = new Trace($unId, $uneDateDebut, $uneDateFin, $terminee, $unIdUtilisateur);
-            
+
             $lesPointsDeTrace = $this->getLesPointsDeTrace($unId);
             foreach ($lesPointsDeTrace as $unPoint) {
                 $uneTrace->ajouterPoint($unPoint);
             }
-            
+
             // ajout de l'utilisateur à la collection
             $lesTraces[] = $uneTrace;
             // extrait la ligne suivante
@@ -1373,7 +1403,7 @@ class DAO
             $longitude = utf8_encode($uneLigne->longitude);
             $altitude = utf8_encode($uneLigne->altitude);
             $pseudo = utf8_encore($uneLigne->pseudo);
-            
+
             $unUtilisateur = new Utilisateur($id, $idUtilisateur, $dateDebut, $terminee, $nbPoints, $dateFin, $latitude, $longitude, $altitude, $pseudo);
             // ajout de l'utilisateur à la collection
             $lesTraces[] = $unUtilisateur;
@@ -1392,7 +1422,7 @@ class DAO
         $req1 = $this->cnx->prepare($txt_req1);
         $req1->bindValue("id", $id, PDO::PARAM_STR);
         $req1->execute();
-        print_r($req1);
+
         $uneLigne = $req1->fetch(PDO::FETCH_OBJ);
         if($uneLigne->nb == 1)
         {
@@ -1412,7 +1442,28 @@ class DAO
     }
 
     public function terminerUneTrace($uneTrace) {
+        // Préparation de la requête mise à jour (maj)
 
+        $lesPointsDeTrace = $this->getLesPointsDeTrace($uneTrace);
+
+        if (sizeof($lesPointsDeTrace) == 0) {
+            $dateFin = date("YYYY-MM-dd");
+        } else {
+            $dateFin = $lesPointsDeTrace[sizeof($lesPointsDeTrace) - 1]->getDateHeure();
+        }
+
+        $txt_req = "UPDATE tracegps_traces
+                    SET terminee = 1, dateFin = :dateDeFin
+                    WHERE id = :id";
+
+        $req = $this->cnx->prepare($txt_req);
+        $req->bindValue(":id", $uneTrace, PDO::PARAM_INT);
+        $req->bindValue(":dateDeFin", $dateFin, PDO::PARAM_STR);
+
+
+        $ok = $req->execute();
+
+        return $ok;
     }
 } // fin de la classe DAO
 // ATTENTION : on ne met pas de balise de fin de script pour ne pas prendre le risque
