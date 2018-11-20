@@ -231,7 +231,7 @@ else {
 // echo ('<br>');
 // }
 
-
+/*
 // test de la méthode getUneTrace -----------------------------------------------------------------
 // modifié par Jim le 14/8/2018
 //echo "<h3>Test de getUneTrace : </h3>";
@@ -253,7 +253,7 @@ else {
 
 
 
-
+*/
 
 
 
@@ -606,7 +606,7 @@ else {
 // // début de la zone attribuée au développeur 3 (LE SAINT) : lignes 400 à 499
 // // test de la méthode creerUneTrace ----------------------------------------------------------
 // // modifié par LE SAINT 16/10/18
-
+/*
 echo "<h3>Test de creerUneTrace : </h3>";
 $trace1 = new Trace(0, "2017-12-18 14:00:00", "2017-12-18 14:10:00", true, 3);
 $ok = $dao->creerUneTrace($trace1);
@@ -626,7 +626,7 @@ if ($ok) {
 else {
     echo "<p>Echec lors de l'enregistrement de la trace !</p>";
 }
-
+*/
 // test de la méthode creerUnPointDeTrace ---------------------------------------------------------
 // modifié par Jim le 13/8/2018
 echo "<h3>Test de creerUnPointDeTrace : </h3>";
@@ -653,7 +653,7 @@ $nbPoints = sizeof($lesPoints);
 echo "<p>Nombre de points de la trace 1 : " . $nbPoints . "</p>";
 echo ('<br>');
   
-
+/*
 // // test de la méthode getLesTracesAutorisees($idUtilisateur) --------------------------------------
 // // modifié par Jim le 14/8/2018
 echo "<h3>Test de getLesTracesAutorisees(idUtilisateur) : </h3>";
@@ -683,7 +683,7 @@ echo ('<br>');
 
 
 
-
+*/
 
 
 

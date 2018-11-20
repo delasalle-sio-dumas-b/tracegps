@@ -1208,11 +1208,8 @@ class DAO
 
     public function getToutesLesTraces() {
         // préparation de la requête de recherche
-        $txt_req = "Select id, idUtilisateur, dateDebut, terminee, nbPoints, dateFin, latitude, longitude, altitude, pseudo";
-        $txt_req .= "from tracegps_vue_traces, tracegps_points, tracegps_traces";
-        $txt_req .= "where tracegps_vue_traces.id = tracegps_traces.id";
-        $txt_req .= "and tracegps_points.idTrace = tracegps_traces.id";
-        $txt_req .= "order by id";
+        $txt_req = "Select * from tracegps_vue_traces";
+
         
         $req = $this->cnx->prepare($txt_req);
         // extraction des données
@@ -1230,14 +1227,11 @@ class DAO
             $terminee = utf8_encode($uneLigne->terminee);
             $nbPoints = utf8_encode($uneLigne->nbPoints);
             $dateFin = utf8_encode($uneLigne->dateFin);
-            $latitude = utf8_encode($uneLigne->latitude);
-            $longitude = utf8_encode($uneLigne->longitude);
-            $altitude = utf8_encode($uneLigne->altitude);
-            $pseudo = utf8_encore($uneLigne->pseudo);
+  
+            $uneTrace = new Trace($id, $idUtilisateur, $dateDebut, $terminee, $nbPoints, $dateFin);
             
-            $unUtilisateur = new Utilisateur($id, $idUtilisateur, $dateDebut, $terminee, $nbPoints, $dateFin, $latitude, $longitude, $altitude, $pseudo);
             // ajout de l'utilisateur à la collection
-            $lesTraces[] = $unUtilisateur;
+            $lesTraces[] = $uneTrace;
             // extrait la ligne suivante
             $uneLigne = $req->fetch(PDO::FETCH_OBJ);
         }
