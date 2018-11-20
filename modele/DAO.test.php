@@ -231,7 +231,7 @@ else {
 // echo ('<br>');
 // }
 
-
+/*
 // test de la méthode getUneTrace -----------------------------------------------------------------
 // modifié par Jim le 14/8/2018
 echo "<h3>Test de getUneTrace : </h3>";
@@ -244,7 +244,11 @@ else {
 }
 $uneTrace = $dao->getUneTrace(100);
 if ($uneTrace) {
+<<<<<<< HEAD
    echo "<p>La trace 100 existe : <br>" . $uneTrace->toString() . "</p>";
+=======
+    echo "<p>La trace 100 existe : <br>" . $uneTrace->toString() . "</p>";
+>>>>>>> branch 'master' of https://github.com/delasalle-sio-dumas-b/tracegps.git
 }
 else {
     echo "<p>La trace 100 n'existe pas !</p>";
@@ -253,7 +257,7 @@ else {
 
 
 
-
+*/
 
 
 
@@ -525,6 +529,17 @@ else {
 //     echo ('<br>');
 // }
 
+// test de la méthode getLesTraces($idUtilisateur) ------------------------------------------------
+// modifié par Jim le 14/8/2018
+echo "<h3>Test de getLesTraces(idUtilisateur) : </h3>";
+$lesTraces = $dao->getLesTraces(2);
+$nbReponses = sizeof($lesTraces);
+echo "<p>Nombre de traces de l'utilisateur 2 : " . $nbReponses . "</p>";
+// affichage des traces
+foreach ($lesTraces as $uneTrace)
+{   echo ($uneTrace->toString());
+    echo ('<br>');
+}
 
 
 
@@ -606,7 +621,7 @@ else {
 // // début de la zone attribuée au développeur 3 (LE SAINT) : lignes 400 à 499
 // // test de la méthode creerUneTrace ----------------------------------------------------------
 // // modifié par LE SAINT 16/10/18
-
+/*
 echo "<h3>Test de creerUneTrace : </h3>";
 $trace1 = new Trace(0, "2017-12-18 14:00:00", "2017-12-18 14:10:00", true, 3);
 $ok = $dao->creerUneTrace($trace1);
@@ -626,7 +641,7 @@ if ($ok) {
 else {
     echo "<p>Echec lors de l'enregistrement de la trace !</p>";
 }
-
+*/
 // test de la méthode creerUnPointDeTrace ---------------------------------------------------------
 // modifié par Jim le 13/8/2018
 echo "<h3>Test de creerUnPointDeTrace : </h3>";
@@ -653,7 +668,7 @@ $nbPoints = sizeof($lesPoints);
 echo "<p>Nombre de points de la trace 1 : " . $nbPoints . "</p>";
 echo ('<br>');
   
-
+/*
 // // test de la méthode getLesTracesAutorisees($idUtilisateur) --------------------------------------
 // // modifié par Jim le 14/8/2018
 echo "<h3>Test de getLesTracesAutorisees(idUtilisateur) : </h3>";
@@ -683,7 +698,7 @@ echo ('<br>');
 
 
 
-
+*/
 
 
 
@@ -847,18 +862,23 @@ echo ('<br>');
 // --------------------------------------------------------------------------------------
 
 // test de la méthode supprimerUneTrace -----------------------------------------------------------
-// modifié par Jim le 15/8/2018
-// echo "<h3>Test de supprimerUneTrace : </h3>";
-// $ok = $dao->supprimerUneTrace(7);
-// if ($ok) {
-//     echo "<p>Trace bien supprimée !</p>";
-// }
-// else {
-//     echo "<p>Echec lors de la suppression de la trace !</p>";
-// }
+ //modifié par Jim le 15/8/2018
+ /*
+ echo "<h3>Test de supprimerUneTrace : </h3>";
+ $ok = $dao->supprimerUneTrace(7);
+ if ($ok) {
+     echo "<p>Trace bien supprimée !</p>";
+ }
+ else {
+     echo "<p>Echec lors de la suppression de la trace !</p>";
+ }
 
-// // ferme la connexion à MySQL :
-// unset($dao);
+//ferme la connexion à MySQL :
+ unset($dao);
+*/
+ 
+ 
+ 
 
 echo "<h3>Test de getToutesLesTraces : </h3>";
 $lesTraces = $dao->getToutesLesTraces();
@@ -877,6 +897,26 @@ if ($ok) {
 else {
     echo "<p>Echec lors de la suppression de la trace !</p>";
 }
+
+
+
+// test des méthodes creerUnPointDeTrace et terminerUneTrace --------------------------------------
+// modifié par Jim le 15/8/2018
+echo "<h3>Test de terminerUneTrace : </h3>";
+// on choisit une trace non terminée
+$unIdTrace = 3;
+// on l'affiche
+$laTrace = $dao->getUneTrace($unIdTrace);
+echo "<h4>l'objet laTrace avant l'appel de la méthode terminerUneTrace : </h4>";
+echo ($laTrace->toString());
+echo ('<br>');
+// on la termine
+$dao->terminerUneTrace($unIdTrace);
+// et on l'affiche à nouveau
+$laTrace = $dao->getUneTrace($unIdTrace);
+echo "<h4>l'objet laTrace après l'appel de la méthode terminerUneTrace : </h4>";
+echo ($laTrace->toString());
+echo ('<br>');
 
 ?>
 

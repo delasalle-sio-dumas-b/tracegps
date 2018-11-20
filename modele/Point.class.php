@@ -113,8 +113,8 @@ class Point
     // fournit : la distance (en Km) entre les 2 points
     public static function getDistance(Point $point1, Point $point2)
     {
-        return round(self::getDistanceBetween($point1->getLatitude(), $point1->getLongitude(),
-                                        $point2->getLatitude(), $point2->getLongitude()), 2);
+        return self::getDistanceBetween($point1->getLatitude(), $point1->getLongitude(),
+                                        $point2->getLatitude(), $point2->getLongitude());
     }
 
 } // fin de la classe Point
