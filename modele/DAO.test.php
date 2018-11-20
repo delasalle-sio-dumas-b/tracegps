@@ -882,7 +882,6 @@ echo ('<br>');
 }
 
 echo "<h3>Test de supprimerUneTrace : </h3>";
-$ok = $dao->supprimerUneTrace(7);
 if ($ok) {
     echo "<p>Trace bien supprimée !</p>";
 }
