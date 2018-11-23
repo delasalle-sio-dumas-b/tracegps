@@ -292,7 +292,7 @@ $nbPoints = sizeof($lesPoints);
 echo "<p>Nombre de points de la trace 1 : " . $nbPoints . "</p>";
 // on crée un sixième point et on l'ajoute à la trace 1
 $unIdTrace = 1;
-$unID = 6;
+$unID = 7;
 $uneLatitude = 48.20;
 $uneLongitude = -1.55;
 $uneAltitude = 50;
@@ -384,7 +384,7 @@ echo ('<br>');
 // test de la méthode creerUneTrace ----------------------------------------------------------
 // modifié par Jim le 14/8/2018
 echo "<h3>Test de creerUneTrace : </h3>";
-$trace1 = new Trace(0, "2017-12-18 14:00:00", "2017-12-18 14:10:00", true, 3);
+$trace1 = new Trace(50, "2017-12-18 14:00:00", "2017-12-18 14:10:00", true, 3);
 $ok = $dao->creerUneTrace($trace1);
 if ($ok) {
     echo "<p>Trace bien enregistrée !</p>";
@@ -393,7 +393,7 @@ if ($ok) {
 else {
     echo "<p>Echec lors de l'enregistrement de la trace !</p>";
 }
-$trace2 = new Trace(0, date('Y-m-d H:i:s', time()), null, false, 3);
+$trace2 = new Trace(799, date('Y-m-d H:i:s', time()), null, false, 3);
 $ok = $dao->creerUneTrace($trace2);
 if ($ok) {
     echo "<p>Trace bien enregistrée !</p>";
@@ -403,22 +403,10 @@ else {
     echo "<p>Echec lors de l'enregistrement de la trace !</p>";
 }
 
-
-
 // test de la méthode supprimerUneTrace -----------------------------------------------------------
 // modifié par Jim le 15/8/2018
 echo "<h3>Test de supprimerUneTrace : </h3>";
-$ok = $dao->supprimerUneTrace(22);
-if ($ok) {
-    echo "<p>Trace bien supprimée !</p>";
-} 
-else {
-    echo "<p>Echec lors de la suppression de la trace !</p>";
-}
-// test de la méthode supprimerUneTrace -----------------------------------------------------------
-// modifié par Jim le 15/8/2018
-echo "<h3>Test de supprimerUneTrace : </h3>";
-$ok = $dao->supprimerUneTrace(22);
+$ok = $dao->supprimerUneTrace(1);
 if ($ok) {
     echo "<p>Trace bien supprimée !</p>";
 }

@@ -943,10 +943,30 @@ class DAO
 
         $req->bindValue("idAut", $idAutorise, PDO::PARAM_INT);
 
-
-        print_r($req);
+        $req->setFetchMode(PDO::FETCH_OBJ);
         $req->execute();
-        $reponses = $req->fetch();
+
+        $lesUtilisateurs = array();
+
+        while ($uneLigne = $req->fetch()) {
+            // création d'un objet Utilisateur
+            $unId = utf8_encode($uneLigne->id);
+            $unPseudo = utf8_encode($uneLigne->pseudo);
+            $unMdpSha1 = utf8_encode($uneLigne->mdpSha1);
+            $uneAdrMail = utf8_encode($uneLigne->adrMail);
+            $unNumTel = utf8_encode($uneLigne->numTel);
+            $unNiveau = utf8_encode($uneLigne->niveau);
+            $uneDateCreation = utf8_encode($uneLigne->dateCreation);
+            $unNbTraces = utf8_encode($uneLigne->nbTraces);
+            $uneDateDerniereTrace = utf8_encode($uneLigne->dateDerniereTrace);
+
+            $unUtilisateur = new Utilisateur($unId, $unPseudo, $unMdpSha1, $uneAdrMail, $unNumTel, $unNiveau, $uneDateCreation, $unNbTraces, $uneDateDerniereTrace);
+            // ajout de l'utilisateur à la collection
+            $lesUtilisateurs[] = $unUtilisateur;
+        }
+
+        return $lesUtilisateurs;
+
     }
 
 
@@ -1013,7 +1033,7 @@ class DAO
 
             $uneTrace = new Trace($unId, $uneDateDebut, $uneDateFin, $terminee, $unIdUtilisateur);
 
-            
+                
 
             $lesPointsDeTrace = $this->getLesPointsDeTrace($unId);
             foreach ($lesPointsDeTrace as $unPoint) {
@@ -1253,7 +1273,6 @@ class DAO
 
         $txt_req1 = "insert into tracegps_points (idTrace, id, latitude, longitude, altitude, dateHeure, rythmeCardio)";
         $txt_req1 .= " values (:idTrace, :id, :latitude, :longitude, :altitude, :dateHeure, :rythmeCardio)";
-        $req1 = $this->cnx->prepare($txt_req1);
 
         $req1 = $this->cnx->prepare($txt_req1);
         $req1->bindValue("idTrace", utf8_decode($unPointDeTrace->getIdTrace()), PDO::PARAM_INT);
@@ -1266,17 +1285,17 @@ class DAO
 
         $ok = $req1->execute();
 
-        if (!$ok )return false;
+        if (! $ok)return false;
 
         if ( $unPointDeTrace->getId() == 1)
         {
-            $req2 = "update tracegps_traces set dateDebut = :dateHeure";
+            $txt_req2 = "update tracegps_traces set dateDebut = :dateHeure";
             $req2 = $this->cnx->prepare($txt_req2);
             $req2->bindValue("dateHeure", utf8_decode($unPointDeTrace->getDateHeure()), PDO::PARAM_STR);
             $ok2 = $req2->execute();
 
+            return $ok2;
         }
-        return true;
     }
 
 
