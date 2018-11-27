@@ -1,7 +1,7 @@
 <?php
 namespace services;
 
-class DemanderMdp
+class GetLesUtilisateursQueJautorise
 {
 }
 
