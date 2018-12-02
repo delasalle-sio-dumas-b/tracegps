@@ -37,14 +37,14 @@
 
 
 // certaines méthodes nécessitent les classes suivantes :
-include_once ('Utilisateur.class.php');
-include_once ('Trace.class.php');
-include_once ('PointDeTrace.class.php');
-include_once ('Point.class.php');
-include_once ('Outils.class.php');
+include_once('Utilisateur.class.php');
+include_once('Trace.class.php');
+include_once('PointDeTrace.class.php');
+include_once('Point.class.php');
+include_once('Outils.class.php');
 
 // inclusion des paramètres de l'application
-include_once ('parametres.php');
+include_once('parametres.php');
 
 // début de la classe DAO (Data Access Object)
 class DAO
@@ -342,9 +342,10 @@ class DAO
 
     // Le code restant à développer va être réparti entre les membres de l'équipe de développement.
     // Afin de limiter les conflits avec GitHub, il est décidé d'attribuer une zone de ce fichier à chaque développeur.
-    // Développeur 1 : lignes 350 à 549
-    // Développeur 2 : lignes 550 à 749
-    // Développeur 3 : lignes 750 à 950
+    // Développeur 1 : Leilla
+    // Développeur 2 : Dylan
+    // Développeur 3 : Clément
+    // Développeur 4 : Benjamin
 
     // Quelques conseils pour le travail collaboratif :
     // avant d'attaquer un cycle de développement (début de séance, nouvelle méthode, ...), faites un Pull pour récupérer 
@@ -353,7 +354,7 @@ class DAO
 
 
     // --------------------------------------------------------------------------------------
-    // début de la zone attribuée au développeur 1 (Leilla) : lignes 350 à 549
+    // début de la zone attribuée au développeur 1 (Leilla)
     // --------------------------------------------------------------------------------------
 
     //cette fonction indique si l'utilisateur autorise un autre utilisateur à consulter ses traces
@@ -465,7 +466,8 @@ class DAO
     //Valeur de retour : un objet
     //un objet de la classe Trace si $idTrace existe
     //l'objet null si $idTrace n'existe pas
-    public function getUneTrace($idTrace) {
+    public function getUneTrace($idTrace)
+    {
         // préparation de la requête de recherche
         $txt_req = "SELECT *";
         $txt_req = $txt_req . " FROM tracegps_traces";
@@ -481,10 +483,9 @@ class DAO
         $req->closeCursor();
 
         // traitement de la réponse
-        if ( ! $uneLigne) {
+        if (!$uneLigne) {
             return null;
-        }
-        else {
+        } else {
             // création d'un objet Trace
             $unId = utf8_encode($uneLigne->id);
             $uneDateHeureDebut = utf8_encode($uneLigne->dateDebut);
@@ -502,417 +503,15 @@ class DAO
             return $uneTrace;
         }
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     // --------------------------------------------------------------------------------------
-    // début de la zone attribuée au développeur 2 (Dylan VALLÉE) : lignes 550 à 749
+    // début de la zone attribuée au développeur 2 (Dylan VALLÉE)
     // --------------------------------------------------------------------------------------
-    public function existeAdrMailUtilisateur($adr) {
+    public function existeAdrMailUtilisateur($adr)
+    {
         // préparation de la requête de recherche
-        $txt_req = "Select count(*) from tracegps_utilisateurs where adrMail = :adr";
+        $txt_req = "SELECT COUNT(*) FROM tracegps_utilisateurs WHERE adrMail = :adr";
         $req = $this->cnx->prepare($txt_req);
         // liaison de la requête et de ses paramètres
         $req->bindValue("adr", $adr, PDO::PARAM_STR);
@@ -925,8 +524,7 @@ class DAO
         // fourniture de la réponse
         if ($nbReponses == 0) {
             return false;
-        }
-        else {
+        } else {
             return true;
         }
     }
@@ -1009,7 +607,8 @@ class DAO
         return $lesUtilisateurs;
     }
 
-    public function getLesTraces($idUtilisateur) {
+    public function getLesTraces($idUtilisateur)
+    {
         $txt_req = "SELECT * 
                     FROM tracegps_traces
                     WHERE idUtilisateur = :idUser";
@@ -1033,7 +632,6 @@ class DAO
 
             $uneTrace = new Trace($unId, $uneDateDebut, $uneDateFin, $terminee, $unIdUtilisateur);
 
-                
 
             $lesPointsDeTrace = $this->getLesPointsDeTrace($unId);
             foreach ($lesPointsDeTrace as $unPoint) {
@@ -1049,202 +647,11 @@ class DAO
         return $lesTraces;
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    // début de la zone attribuée au développeur 3 (LE SAINT Clément) : lignes 750 à 949
-
-    public function creerUneTrace($uneTrace) {
+    // --------------------------------------------------------------------------------------
+    // début de la zone attribuée au développeur 3 (LE SAINT Clément)
+    // --------------------------------------------------------------------------------------
+    public function creerUneTrace($uneTrace)
+    {
         // on teste si l'utilisateur existe déjà
         // préparation de la requête
         $txt_req1 = "insert into tracegps_traces (dateDebut, dateFin, terminee, idUtilisateur)";
@@ -1253,12 +660,9 @@ class DAO
         // liaison de la requête et de ses paramètres
         $req1->bindValue("dateDebut", utf8_decode($uneTrace->getDateHeureDebut()), PDO::PARAM_STR);
 
-        if($uneTrace->getDateHeureFin()== NULL)
-        {
+        if ($uneTrace->getDateHeureFin() == NULL) {
             $req1->bindValue("dateFin", null, PDO::PARAM_NULL);
-        }
-        else
-        {
+        } else {
             $req1->bindValue("dateFin", utf8_decode($uneTrace->getDateHeureFin()), PDO::PARAM_STR);
         }
         $req1->bindValue("terminee", utf8_decode($uneTrace->getTerminee()), PDO::PARAM_STR);
@@ -1269,9 +673,10 @@ class DAO
     }
 
 
-    public function creerUnPointDeTrace($unPointDeTrace) {
+    public function creerUnPointDeTrace($unPointDeTrace)
+    {
 
-        $txt_req1 = "insert into tracegps_points (idTrace, id, latitude, longitude, altitude, dateHeure, rythmeCardio)";
+        $txt_req1 = "INSERT INTO tracegps_points (idTrace, id, latitude, longitude, altitude, dateHeure, rythmeCardio)";
         $txt_req1 .= " values (:idTrace, :id, :latitude, :longitude, :altitude, :dateHeure, :rythmeCardio)";
 
         $req1 = $this->cnx->prepare($txt_req1);
@@ -1285,21 +690,23 @@ class DAO
 
         $ok = $req1->execute();
 
-        if (! $ok)return false;
+        $req1->closeCursor();
 
-        if ( $unPointDeTrace->getId() == 1)
-        {
-            $txt_req2 = "update tracegps_traces set dateDebut = :dateHeure";
-            $req2 = $this->cnx->prepare($txt_req2);
-            $req2->bindValue("dateHeure", utf8_decode($unPointDeTrace->getDateHeure()), PDO::PARAM_STR);
-            $ok2 = $req2->execute();
+        if (!$ok) return false;
 
-            return $ok2;
+        if ($unPointDeTrace->getId() == 1) {
+            $txt_req1 = "UPDATE tracegps_traces SET dateDebut = :dateHeure";
+            $req1 = $this->cnx->prepare($txt_req1);
+            $req1->bindValue("dateHeure", utf8_decode($unPointDeTrace->getDateHeure()), PDO::PARAM_STR);
+            $ok = $req1->execute();
+
+            return $ok;
         }
     }
 
 
-    public function getLesTracesAutorisees($idUtilisateur) {
+    public function getLesTracesAutorisees($idUtilisateur)
+    {
         // préparation de la requête de recherche
         $txt_req = "Select id, dateDebut, dateFin, terminee, idUtilisateur";
         $txt_req .= " from tracegps_traces";
@@ -1344,193 +751,12 @@ class DAO
     }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     // --------------------------------------------------------------------------------------
-    // début de la zone attribuée au développeur 4 (DUMAS Benjamin) : lignes 950 à 1150
+    // début de la zone attribuée au développeur 4 (DUMAS Benjamin)
     // --------------------------------------------------------------------------------------
 
-    public function getToutesLesTraces() {
+    public function getToutesLesTraces()
+    {
         // préparation de la requête de recherche
         $txt_req = "Select * from tracegps_vue_traces order by id";
 
@@ -1551,14 +777,14 @@ class DAO
 
             $terminee = ($uneLigne->terminee);
             $dateFin = ($uneLigne->dateFin);
-  
+
             $uneTrace = new Trace($id, $dateDebut, $dateFin, $terminee, $idUtilisateur);
-            
+
             $lesPoints = $this->getLesPointsDeTrace($id);
             foreach ($lesPoints as $unPoint) {
                 $uneTrace->ajouterPoint($unPoint);
             }
-            
+
             // ajout de l'utilisateur à la collection
             $lesTraces[] = $uneTrace;
             // extrait la ligne suivante
@@ -1570,7 +796,8 @@ class DAO
         return $lesTraces;
     }
 
-    public function supprimerUneTrace($id){ 
+    public function supprimerUneTrace($id)
+    {
         // préparation de la requete de suppression
         $txt_req1 = "SELECT COUNT(id) as nb from tracegps_traces where id = :id";
         $req1 = $this->cnx->prepare($txt_req1);
@@ -1578,8 +805,7 @@ class DAO
         $req1->execute();
 
         $uneLigne = $req1->fetch(PDO::FETCH_OBJ);
-        if($uneLigne->nb == 1)
-        {
+        if ($uneLigne->nb == 1) {
             $txt_req2 = "DELETE from tracegps_traces where id = :id";
             $req2 = $this->cnx->prepare($txt_req2);
             // liaison de la requête et de ses paramètres
@@ -1588,14 +814,13 @@ class DAO
             $ok = $req2->execute();
             // fourniture de la réponse
             return $ok;
-        }
-        else
-        {
+        } else {
             return false;
         }
     }
 
-    public function terminerUneTrace($uneTrace) {
+    public function terminerUneTrace($uneTrace)
+    {
         // Préparation de la requête mise à jour (maj)
 
         $lesPointsDeTrace = $this->getLesPointsDeTrace($uneTrace);

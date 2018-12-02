@@ -1,4 +1,12 @@
 <?php
+// Projet TraceGPS - services web
+// fichier :  services/CreerUnUtilisateur.php
+// Dernière mise à jour : 27/11/2018 par Jim
+
+//  Rôle : ce service web permet à un utilisateur de demander un nouveau mot de passe s'il l'a oublié.
+//  Le service web doit recevoir 4 paramètres :
+//  pseudo : le pseudo de l'utilisateur
+//  lang : le langage utilisé pour le flux de données ("xml" ou "json")
 
 // Connexion du serveur web à la base MySQL
 require_once('../modele/DAO.class.php');
@@ -48,7 +56,6 @@ if ($pseudo == '') {
                     " vous allez recevoir un courriel avec votre mot de passe.";
             }
         }
-
     }
 }
 

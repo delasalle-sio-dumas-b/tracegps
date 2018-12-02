@@ -289,7 +289,12 @@ class Trace
             $temps = strtotime($unPoint->getDateHeure()) - strtotime($pointPrecedent->getDateHeure());
             $unPoint->setTempsCumule($pointPrecedent->getTempsCumule() + $temps);
 
-            $unPoint->setVitesse(Point::getDistance($pointPrecedent, $unPoint) / ($temps / 3600));
+            if ($temps === 0) {
+                $unPoint->setVitesse(0);
+            }
+            else {
+                $unPoint->setVitesse(Point::getDistance($pointPrecedent, $unPoint) / ($temps / 3600));
+            }
 
         }
         $this->lesPointsDeTrace[] = $unPoint;
