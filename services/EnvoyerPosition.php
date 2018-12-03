@@ -138,18 +138,18 @@ function creerFluxJSON($msg, $data_point)
      */
 
     if ($data_point != null) {
-        $elt_data_point = ["donnees" => $data_point->getId()];
+        $elt_data_point = ["id" => $data_point->getId()];
     }
     else {
         $elt_data_point = ["donnees" => []];
     }
     // construction de l'élément "data"
-    $elt_data = ["reponse" => $msg];
+    $elt_data = ["reponse" => $msg, "donnees" => $elt_data_point];
 
     // construction de la racine
     $elt_racine = ["data" => $elt_data];
 
-    $elt_racine = ["donnees" => $elt_data_point];
+//    $elt_donnees = ["donnees" => $elt_data_point];
 
 
     // retourne le contenu JSON (l'option JSON_PRETTY_PRINT gère les sauts de ligne et l'indentation)
