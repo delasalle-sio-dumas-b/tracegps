@@ -52,7 +52,7 @@ if ($mdpSha1 == "" || $pseudo == "" || $pseudoDestinataire == "" || $texteMessag
             $adrMailDestinataire = $destinataire->getAdrMail();
             $lien1 = "http://localhost/ws-php-vallee/tracegps/services/ValiderDemandeAutorisation.php?a=" . $mdpSha1 . "&b=" . $pseudo . "&c=" . $pseudoDestinataire . "&d=1";
             $lien2 = "http://localhost/ws-php-vallee/tracegps/services/ValiderDemandeAutorisation.php?a=" . $mdpSha1 . "&b=" . $pseudo . "&c=" . $pseudoDestinataire . "&d=0";
-            $msg = "Un courriel à été envoyé au destinataire.";
+            $msg = $pseudoDestinataire. " va recevoir un courriel avec votre demande.";
 
             $sujetMail = "Votre demande d'autorisation à un utilisateur du système TraceGPS";
             $contenuMail = "Cher ou chère " . $pseudoDestinataire . "\n\n";
@@ -138,3 +138,4 @@ function creerFluxJSON($msg)
     echo json_encode($elt_racine, JSON_PRETTY_PRINT);
     return;
 }
+
