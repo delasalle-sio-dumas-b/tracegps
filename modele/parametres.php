@@ -15,7 +15,7 @@ $PARAM_PWD = "spgecart";		// son mot de passe
 // Autres paramètres -----------------------------------------------------------------------------------------
 
 // adresse de l'émetteur lors d'un envoi de courriel
-$ADR_MAIL_EMETTEUR = "delasalle.sio.vallee.d@gmail.com";
+$ADR_MAIL_EMETTEUR = "delasalle.sio.eleves@gmail.com";
 
 // ATTENTION : on ne met pas de balise de fin de script pour ne pas prendre le risque
 // d'enregistrer d'espaces après la balise de fin de script !!!!!!!!!!!!
