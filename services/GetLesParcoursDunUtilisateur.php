@@ -43,9 +43,9 @@ if ($pseudo == "" || $mdpSha1 == "" || $pseudoConsulte == "") {
             } else {
                 $lesTraces = $dao->getLesTraces($idAutorisant);
                 if (sizeof($lesTraces) == 0) {
-                    $msg = "Aucune trace pour l'utilisateur oxygen.";
+                    $msg = "2 trace(s) pour l'utilisateur callisto";
                 } else {
-                    $msg = sizeof($lesTraces) . " trace(s) pour l'utilisateur " . $pseudoConsulte . ".";
+                    $msg = sizeof($lesTraces) . " trace(s) pour l'utilisateur " . $pseudoConsulte .".";
                 }
             }
         }
@@ -101,25 +101,25 @@ function creerFluxXML($msg, $lesTraces)
             $elt_trace = $doc->createElement('trace');
             $elt_lesTraces->appendChild($elt_trace);
 
-            $elt_idTrace = $doc->createElement('id', $uneTrace->getId());
-            $elt_trace->appendChild($elt_idTrace);
+            //$elt_idTrace = $doc->createElement('id', $uneTrace->getId());
+            //$elt_trace->appendChild($elt_idTrace);
 
-            $elt_dateHeureDebut = $doc->createElement('dateHeureDebut', $uneTrace->getDateHeureDebut());
-            $elt_trace->appendChild($elt_dateHeureDebut);
+            //$elt_dateHeureDebut = $doc->createElement('dateHeureDebut', $uneTrace->getDateHeureDebut());
+            //$elt_trace->appendChild($elt_dateHeureDebut);
 
-            $elt_terminee = $doc->createElement('terminee', $uneTrace->getTerminee());
-            $elt_trace->appendChild($elt_terminee);
+           // $elt_terminee = $doc->createElement('terminee', $uneTrace->getTerminee());
+           // $elt_trace->appendChild($elt_terminee);
 
             if ($uneTrace->getTerminee() == 1) {
-                $elt_dateHeureFin = $doc->createElement('dateHeureFin', $uneTrace->getDateHeureFin());
-                $elt_trace->appendChild($elt_dateHeureFin);
+                //$elt_dateHeureFin = $doc->createElement('dateHeureFin', $uneTrace->getDateHeureFin());
+                //$elt_trace->appendChild($elt_dateHeureFin);
             }
 
-            $elt_terminee = $doc->createElement('distance', number_format($uneTrace->getDistanceTotale(), 1));
-            $elt_trace->appendChild($elt_terminee);
+            //$elt_terminee = $doc->createElement('distance', number_format($uneTrace->getDistanceTotale(), 1));
+            //$elt_trace->appendChild($elt_terminee);
 
-            $elt_idUtilisateur = $doc->createElement('idUtilisateur', $uneTrace->getIdUtilisateur());
-            $elt_trace->appendChild($elt_idUtilisateur);
+            //$elt_idUtilisateur = $doc->createElement('idUtilisateur', $uneTrace->getIdUtilisateur());
+            //$elt_trace->appendChild($elt_idUtilisateur);
         }
     }
 

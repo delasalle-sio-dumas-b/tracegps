@@ -64,7 +64,9 @@ if ($pseudo == "" || $mdpSha1 == "" || $idTrace == "" || $dateHeure == "" || $la
                 $nouveauPoint = new PointDeTrace($idTrace, $index, $latitude, $longitude, $altitude, $dateHeure, $rythmeCardio, 1, 1, 1);
 
                 $ok = $dao->creerUnPointDeTrace($nouveauPoint);
+               
                 if (!$ok) {
+                    
                     $msg = "Erreur : problème lors de l'enregistrement.";
                 } else {
                     $msg = "Point créé.";
