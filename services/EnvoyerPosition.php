@@ -1,4 +1,4 @@
-<?php // TODO : Need to be modified
+<?php
 // Projet TraceGPS - services web
 // fichier : services/SupprimerUnUtilisateur.php
 // Dernière mise à jour : 15/11/2018 par Jim

@@ -166,7 +166,6 @@ function creerFluxXML($msg, $uneTrace)
             $elt_altitude = $doc->createElement('altitude', $unPoint->getAltitude());
             $elt_point->appendChild($elt_altitude);
 
-            // TODO : Check getDateHeure
             $elt_dateHeure = $doc->createElement('dateHeure', $unPoint->getDateHeure());
             $elt_point->appendChild($elt_dateHeure);
 

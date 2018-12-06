@@ -1,4 +1,4 @@
-<?php // TODO : Test nécessaire
+<?php
 // Projet TraceGPS - services web
 // fichier : services/Connecter.php
 // Dernière mise à jour : 29/9/2018 par Jim
