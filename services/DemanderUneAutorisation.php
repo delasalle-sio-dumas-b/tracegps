@@ -138,4 +138,3 @@ function creerFluxJSON($msg)
     echo json_encode($elt_racine, JSON_PRETTY_PRINT);
     return;
 }
-

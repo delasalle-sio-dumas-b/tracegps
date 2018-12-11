@@ -700,8 +700,10 @@ class DAO
             $req1->bindValue("dateHeure", utf8_decode($unPointDeTrace->getDateHeure()), PDO::PARAM_STR);
             $ok = $req1->execute();
 
-            return $ok;
+            
         }
+        
+        return true;
     }
 
 

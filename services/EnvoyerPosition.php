@@ -1,4 +1,4 @@
-<?php // TODO : Need to be modified
+<?php
 // Projet TraceGPS - services web
 // fichier : services/SupprimerUnUtilisateur.php
 // Dernière mise à jour : 15/11/2018 par Jim
@@ -64,7 +64,9 @@ if ($pseudo == "" || $mdpSha1 == "" || $idTrace == "" || $dateHeure == "" || $la
                 $nouveauPoint = new PointDeTrace($idTrace, $index, $latitude, $longitude, $altitude, $dateHeure, $rythmeCardio, 1, 1, 1);
 
                 $ok = $dao->creerUnPointDeTrace($nouveauPoint);
+               
                 if (!$ok) {
+                    
                     $msg = "Erreur : problème lors de l'enregistrement.";
                 } else {
                     $msg = "Point créé.";
