@@ -37,6 +37,7 @@ if ($pseudo == "" || $mdpSha1 == "") {
         $msg = "Erreur : authentification incorrecte.";
     } else {
         $uneTrace = $dao->getUneTrace($idTrace);
+        
         if ($uneTrace == null) {
             $msg = "Erreur : parcours inexistant.";
         } else {
