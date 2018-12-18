@@ -19,6 +19,7 @@
 // connexion du serveur web à la base MySQL
 include_once ('../modele/DAO.class.php');
 $dao = new DAO();
+$lesUtilisateursAutorises = null;
 
 // Récupération des données transmises
 // la fonction $_GET récupère une donnée passée en paramètre dans l'URL par la méthode GET
@@ -62,10 +63,10 @@ unset($dao);
 
 // création du flux en sortie
 if ($lang == "xml") {
-    creerFluxXML($msg, $lesUtilisateurs);
+    creerFluxXML($msg, $lesUtilisateursAutorises);
 }
 else {
-    creerFluxJSON($msg, $lesUtilisateurs);
+    creerFluxJSON($msg, $lesUtilisateursAutorises);
 }
 
 // fin du programme (pour ne pas enchainer sur la fonction qui suit)
@@ -126,7 +127,7 @@ function creerFluxXML($msg, $lesUtilisateurs)
     $elt_data->appendChild($elt_reponse);
     
     // traitement des utilisateurs
-    if (sizeof($lesUtilisateurs) > 0) {
+    if (sizeof($lesUtilisateurs) > 0 && ! $lesUtilisateurs == null) {
         // place l'élément 'donnees' dans l'élément 'data'
         $elt_donnees = $doc->createElement('donnees');
         $elt_data->appendChild($elt_donnees);

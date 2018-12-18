@@ -19,6 +19,7 @@
 // connexion du serveur web à la base MySQL
 include_once ('../modele/DAO.class.php');
 $dao = new DAO();
+$lesUtilisateursAutorises = null;
 
 // Récupération des données transmises
 // la fonction $_GET récupère une donnée passée en paramètre dans l'URL par la méthode GET
@@ -124,9 +125,9 @@ function creerFluxXML($msg, $lesUtilisateurs)
     // place l'élément 'reponse' dans l'élément 'data'
     $elt_reponse = $doc->createElement('reponse', $msg);
     $elt_data->appendChild($elt_reponse);
-    
+
     // traitement des utilisateurs
-    if (sizeof($lesUtilisateurs) > 0) {
+    if (sizeof($lesUtilisateurs) > 0 && ! $lesUtilisateurs == null) {
         // place l'élément 'donnees' dans l'élément 'data'
         $elt_donnees = $doc->createElement('donnees');
         $elt_data->appendChild($elt_donnees);
