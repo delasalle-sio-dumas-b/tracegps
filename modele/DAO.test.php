@@ -7,15 +7,18 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="utf-8">
-	<title>Test de la classe DAO</title>
-	<style type="text/css">body {font-family: Arial, Helvetica, sans-serif; font-size: small;}</style>
+    <meta charset="utf-8">
+    <title>Test de la classe DAO</title>
+    <style type="text/css">body {
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: small;
+        }</style>
 </head>
 <body>
 
 <?php
 // connexion du serveur web à la base MySQL
-include_once ('DAO.class.php');
+include_once('DAO.class.php');
 //include_once ('_DAO.mysql.class.php');
 $dao = new DAO();
 
@@ -75,7 +78,7 @@ if ($unUtilisateur) {
 else {
     echo "<p>L'utilisateur admon n'existe pas !</p>";
 }
-*/  
+*/
 
 
 /*
@@ -179,9 +182,6 @@ else {
 */
 
 
-
-
-
 // Le code restant à développer va être réparti entre les membres de l'équipe de développement.
 // Afin de limiter les conflits avec GitHub, il est décidé d'attribuer une zone de ce fichier à chaque développeur.
 // Développeur 1 : lignes 200 à 299
@@ -192,9 +192,6 @@ else {
 // avant d'attaquer un cycle de développement (début de séance, nouvelle méthode, ...), faites un Pull pour récupérer
 // la dernière version du fichier.
 // Après avoir testé et validé une méthode, faites un commit et un push pour transmettre cette version aux autres développeurs.
-
-
-
 
 
 // // --------------------------------------------------------------------------------------
@@ -260,94 +257,6 @@ else {
 */
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // début de la zone attribuée au développeur 2 (Dylan VALLÉE) : lignes 300 à 399
 
 // test de la méthode existeAdrMailUtilisateur ----------------------------------------------------
@@ -388,81 +297,6 @@ else {
 // echo "<p>La suppression de l'autorisation de l'utilisateur 2 vers l'utilisateur 1 a réussi : <b>" . $ok . "</b><br>";
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // début de la zone attribuée au développeur 3 (LE SAINT) : lignes 400 à 499
 // test de la méthode creerUneTrace ----------------------------------------------------------
 // modifié par LE SAINT 16/10/18
@@ -487,24 +321,6 @@ else {
     echo "<p>Echec lors de l'enregistrement de la trace !</p>";
 }
 */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 // // début de la zone attribuée au développeur 2 (Dylan VALLÉE) : lignes 300 à 399
@@ -536,86 +352,10 @@ $lesTraces = $dao->getLesTraces(2);
 $nbReponses = sizeof($lesTraces);
 echo "<p>Nombre de traces de l'utilisateur 2 : " . $nbReponses . "</p>";
 // affichage des traces
-foreach ($lesTraces as $uneTrace)
-{   echo ($uneTrace->toString());
-    echo ('<br>');
+foreach ($lesTraces as $uneTrace) {
+    echo($uneTrace->toString());
+    echo('<br>');
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 // // début de la zone attribuée au développeur 3 (LE SAINT) : lignes 400 à 499
@@ -666,8 +406,8 @@ $ok = $dao->creerUnPointDeTrace($unPoint);
 $lesPoints = $dao->getLesPointsDeTrace(1);
 $nbPoints = sizeof($lesPoints);
 echo "<p>Nombre de points de la trace 1 : " . $nbPoints . "</p>";
-echo ('<br>');
-  
+echo('<br>');
+
 /*
 // // test de la méthode getLesTracesAutorisees($idUtilisateur) --------------------------------------
 // // modifié par Jim le 14/8/2018
@@ -701,196 +441,15 @@ echo ('<br>');
 */
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // --------------------------------------------------------------------------------------
 // début de la zone attribuée au développeur 4 (DUMAS Benjamin) : lignes 500 à 599
 // --------------------------------------------------------------------------------------
 
 // test de la méthode supprimerUneTrace -----------------------------------------------------------
- //modifié par Jim le 15/8/2018
- /*
- echo "<h3>Test de supprimerUneTrace : </h3>";
- $ok = $dao->supprimerUneTrace(7);
- if ($ok) {
-     echo "<p>Trace bien supprimée !</p>";
- }
- else {
-     echo "<p>Echec lors de la suppression de la trace !</p>";
- }
-
-//ferme la connexion à MySQL :
- unset($dao);
-*/
- 
- 
- 
-
-echo "<h3>Test de getToutesLesTraces : </h3>";
-$lesTraces = $dao->getToutesLesTraces();
-$nbReponses = sizeof($lesTraces);
-echo "<p>Nombre de traces : " . $nbReponses . "</p>";
-// affichage des traces
-foreach ($lesTraces as $uneTrace)
-{   echo ($uneTrace->toString());
-echo ('<br>');
-}
-
+//modifié par Jim le 15/8/2018
+/*
 echo "<h3>Test de supprimerUneTrace : </h3>";
+$ok = $dao->supprimerUneTrace(7);
 if ($ok) {
     echo "<p>Trace bien supprimée !</p>";
 }
@@ -898,6 +457,27 @@ else {
     echo "<p>Echec lors de la suppression de la trace !</p>";
 }
 
+//ferme la connexion à MySQL :
+unset($dao);
+*/
+
+
+echo "<h3>Test de getToutesLesTraces : </h3>";
+$lesTraces = $dao->getToutesLesTraces();
+$nbReponses = sizeof($lesTraces);
+echo "<p>Nombre de traces : " . $nbReponses . "</p>";
+// affichage des traces
+foreach ($lesTraces as $uneTrace) {
+    echo($uneTrace->toString());
+    echo('<br>');
+}
+
+echo "<h3>Test de supprimerUneTrace : </h3>";
+if ($ok) {
+    echo "<p>Trace bien supprimée !</p>";
+} else {
+    echo "<p>Echec lors de la suppression de la trace !</p>";
+}
 
 
 // test des méthodes creerUnPointDeTrace et terminerUneTrace --------------------------------------
@@ -908,15 +488,15 @@ $unIdTrace = 3;
 // on l'affiche
 $laTrace = $dao->getUneTrace($unIdTrace);
 echo "<h4>l'objet laTrace avant l'appel de la méthode terminerUneTrace : </h4>";
-echo ($laTrace->toString());
-echo ('<br>');
+echo($laTrace->toString());
+echo('<br>');
 // on la termine
 $dao->terminerUneTrace($unIdTrace);
 // et on l'affiche à nouveau
 $laTrace = $dao->getUneTrace($unIdTrace);
 echo "<h4>l'objet laTrace après l'appel de la méthode terminerUneTrace : </h4>";
-echo ($laTrace->toString());
-echo ('<br>');
+echo($laTrace->toString());
+echo('<br>');
 
 ?>
 

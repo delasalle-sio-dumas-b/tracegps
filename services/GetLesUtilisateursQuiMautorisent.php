@@ -44,10 +44,9 @@ else
     else
     {	// récupération de l'id de l'utilisateur
         $idUtilisateur = $dao->getUnUtilisateur($pseudo)->getId();
-        
+
         // récupération de la liste des utilisateurs autorises à l'aide de la méthode getLesUtilisateursAutorises de la classe DAO
         $lesUtilisateursAutorises = $dao->getLesUtilisateursAutorisant($idUtilisateur);
-        
         
         // mémorisation du nombre d'utilisateurs autorisés
         $nbReponses = sizeof($lesUtilisateursAutorises);
@@ -63,10 +62,10 @@ unset($dao);
 
 // création du flux en sortie
 if ($lang == "xml") {
-    creerFluxXML($msg, $lesUtilisateurs);
+    creerFluxXML($msg, $lesUtilisateursAutorises);
 }
 else {
-    creerFluxJSON($msg, $lesUtilisateurs);
+    creerFluxJSON($msg, $lesUtilisateursAutorises);
 }
 
 // fin du programme (pour ne pas enchainer sur la fonction qui suit)

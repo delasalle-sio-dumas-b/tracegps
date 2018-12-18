@@ -4,18 +4,21 @@
 // Rôle : test de la classe DAO.class.php
 // Dernière mise à jour : 20/11/2018 par LE SAINT Clément
 ?>
-<!DOCTYPE html>
-<html>
-<head>
-	<meta charset="utf-8">
-	<title>Test de la classe DAO</title>
-	<style type="text/css">body {font-family: Arial, Helvetica, sans-serif; font-size: small;}</style>
-</head>
-<body>
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="utf-8">
+        <title>Test de la classe DAO</title>
+        <style type="text/css">body {
+                font-family: Arial, Helvetica, sans-serif;
+                font-size: small;
+            }</style>
+    </head>
+    <body>
 
 <?php
 // connexion du serveur web à la base MySQL
-include_once ('DAO.class.php');
+include_once('DAO.class.php');
 //include_once ('_DAO.mysql.class.php');
 $dao = new DAO();
 
@@ -75,7 +78,7 @@ if ($unUtilisateur) {
 else {
     echo "<p>L'utilisateur admon n'existe pas !</p>";
 }
-*/  
+*/
 
 
 /*
@@ -179,9 +182,6 @@ else {
 */
 
 
-
-
-
 // Le code restant à développer va être réparti entre les membres de l'équipe de développement.
 // Afin de limiter les conflits avec GitHub, il est décidé d'attribuer une zone de ce fichier à chaque développeur.
 // Développeur 1 : lignes 200 à 299
@@ -209,11 +209,10 @@ $lesUtilisateurs = $dao->getLesUtilisateursAutorisant(4);
 $nbReponses = sizeof($lesUtilisateurs);
 echo "<p>Nombre d'utilisateurs autorisant l'utilisateur 4 à voir leurs parcours : " . $nbReponses . "</p>";
 // affichage des utilisateurs
-foreach ($lesUtilisateurs as $unUtilisateur)
-{   echo ($unUtilisateur->toString());
-echo ('<br>');
+foreach ($lesUtilisateurs as $unUtilisateur) {
+    echo($unUtilisateur->toString());
+    echo('<br>');
 }
-
 
 
 // test de la méthode getLesUtilisateursAutorises -------------------------------------------------
@@ -223,12 +222,10 @@ $lesUtilisateurs = $dao->getLesUtilisateursAutorises(2);
 $nbReponses = sizeof($lesUtilisateurs);
 echo "<p>Nombre d'utilisateurs autorisés par l'utilisateur 2 : " . $nbReponses . "</p>";
 // affichage des utilisateurs
-foreach ($lesUtilisateurs as $unUtilisateur)
-{	echo ($unUtilisateur->toString());
-echo ('<br>');
+foreach ($lesUtilisateurs as $unUtilisateur) {
+    echo($unUtilisateur->toString());
+    echo('<br>');
 }
-
-
 
 
 // test de la méthode autoriseAConsulter ----------------------------------------------------------
@@ -239,9 +236,6 @@ echo "<p>L'utilisateur 2 autorise l'utilisateur 3 : <b>" . $autorise . "</b><br>
 
 if ($dao->autoriseAConsulter(3, 2)) $autorise = "oui"; else $autorise = "non";
 echo "<p>L'utilisateur 3 autorise l'utilisateur 2 : <b>" . $autorise . "</b><br>";
-
-
-
 
 
 // test de la méthode creerUneAutorisation ---------------------------------------------------------
@@ -265,8 +259,6 @@ if ($dao->supprimerUneAutorisation(2, 1)) $ok = "oui"; else $ok = "non";
 echo "<p>La suppression de l'autorisation de l'utilisateur 2 vers l'utilisateur 1 a réussi : <b>" . $ok . "</b><br>";
 
 
-
-
 // test de la méthode getLesPointsDeTrace ---------------------------------------------------------
 // modifié par Jim le 13/8/2018
 echo "<h3>Test de getLesPointsDeTrace : </h3>";
@@ -274,13 +266,10 @@ $lesPoints = $dao->getLesPointsDeTrace(1);
 $nbPoints = sizeof($lesPoints);
 echo "<p>Nombre de points de la trace 1 : " . $nbPoints . "</p>";
 // affichage des points
-foreach ($lesPoints as $unPoint)
-{   echo ($unPoint->toString());
-echo ('<br>');
+foreach ($lesPoints as $unPoint) {
+    echo($unPoint->toString());
+    echo('<br>');
 }
-
-
-
 
 
 // test de la méthode creerUnPointDeTrace ---------------------------------------------------------
@@ -307,8 +296,7 @@ $ok = $dao->creerUnPointDeTrace($unPoint);
 $lesPoints = $dao->getLesPointsDeTrace(1);
 $nbPoints = sizeof($lesPoints);
 echo "<p>Nombre de points de la trace 1 : " . $nbPoints . "</p>";
-echo ('<br>');
-
+echo('<br>');
 
 
 // test de la méthode getUneTrace -----------------------------------------------------------------
@@ -317,18 +305,15 @@ echo "<h3>Test de getUneTrace : </h3>";
 $uneTrace = $dao->getUneTrace(2);
 if ($uneTrace) {
     echo "<p>La trace 2 existe : <br>" . $uneTrace->toString() . "</p>";
-}
-else {
+} else {
     echo "<p>La trace 2 n'existe pas !</p>";
 }
 $uneTrace = $dao->getUneTrace(100);
 if ($uneTrace) {
     echo "<p>La trace 100 existe : <br>" . $uneTrace->toString() . "</p>";
-}
-else {
+} else {
     echo "<p>La trace 100 n'existe pas !</p>";
 }
-
 
 
 // test de la méthode getToutesLesTraces ----------------------------------------------------------
@@ -338,13 +323,10 @@ $lesTraces = $dao->getToutesLesTraces();
 $nbReponses = sizeof($lesTraces);
 echo "<p>Nombre de traces : " . $nbReponses . "</p>";
 // affichage des traces
-foreach ($lesTraces as $uneTrace)
-{   echo ($uneTrace->toString());
-echo ('<br>');
+foreach ($lesTraces as $uneTrace) {
+    echo($uneTrace->toString());
+    echo('<br>');
 }
-
-
-
 
 
 // test de la méthode getLesTraces($idUtilisateur) ------------------------------------------------
@@ -354,11 +336,10 @@ $lesTraces = $dao->getLesTraces(2);
 $nbReponses = sizeof($lesTraces);
 echo "<p>Nombre de traces de l'utilisateur 2 : " . $nbReponses . "</p>";
 // affichage des traces
-foreach ($lesTraces as $uneTrace)
-{   echo ($uneTrace->toString());
-echo ('<br>');
+foreach ($lesTraces as $uneTrace) {
+    echo($uneTrace->toString());
+    echo('<br>');
 }
-
 
 
 // test de la méthode getLesTracesAutorisees($idUtilisateur) --------------------------------------
@@ -368,17 +349,17 @@ $lesTraces = $dao->getLesTracesAutorisees(2);
 $nbReponses = sizeof($lesTraces);
 echo "<p>Nombre de traces autorisées à l'utilisateur 2 : " . $nbReponses . "</p>";
 // affichage des traces
-foreach ($lesTraces as $uneTrace)
-{   echo ($uneTrace->toString());
-echo ('<br>');
+foreach ($lesTraces as $uneTrace) {
+    echo($uneTrace->toString());
+    echo('<br>');
 }
 $lesTraces = $dao->getLesTracesAutorisees(3);
 $nbReponses = sizeof($lesTraces);
 echo "<p>Nombre de traces autorisées à l'utilisateur 3 : " . $nbReponses . "</p>";
 // affichage des traces
-foreach ($lesTraces as $uneTrace)
-{   echo ($uneTrace->toString());
-echo ('<br>');
+foreach ($lesTraces as $uneTrace) {
+    echo($uneTrace->toString());
+    echo('<br>');
 }
 
 // test de la méthode creerUneTrace ----------------------------------------------------------
@@ -389,8 +370,7 @@ $ok = $dao->creerUneTrace($trace1);
 if ($ok) {
     echo "<p>Trace bien enregistrée !</p>";
     echo $trace1->toString();
-}
-else {
+} else {
     echo "<p>Echec lors de l'enregistrement de la trace !</p>";
 }
 $trace2 = new Trace(799, date('Y-m-d H:i:s', time()), null, false, 3);
@@ -398,8 +378,7 @@ $ok = $dao->creerUneTrace($trace2);
 if ($ok) {
     echo "<p>Trace bien enregistrée !</p>";
     echo $trace2->toString();
-}
-else {
+} else {
     echo "<p>Echec lors de l'enregistrement de la trace !</p>";
 }
 
@@ -409,12 +388,9 @@ echo "<h3>Test de supprimerUneTrace : </h3>";
 $ok = $dao->supprimerUneTrace(1);
 if ($ok) {
     echo "<p>Trace bien supprimée !</p>";
-}
-else {
+} else {
     echo "<p>Echec lors de la suppression de la trace !</p>";
 }
-
-
 
 
 // test des méthodes creerUnPointDeTrace et terminerUneTrace --------------------------------------
@@ -425,13 +401,13 @@ $unIdTrace = 3;
 // on l'affiche
 $laTrace = $dao->getUneTrace($unIdTrace);
 echo "<h4>l'objet laTrace avant l'appel de la méthode terminerUneTrace : </h4>";
-echo ($laTrace->toString());
-echo ('<br>');
+echo($laTrace->toString());
+echo('<br>');
 // on la termine
 $dao->terminerUneTrace($unIdTrace);
 // et on l'affiche à nouveau
 $laTrace = $dao->getUneTrace($unIdTrace);
 echo "<h4>l'objet laTrace après l'appel de la méthode terminerUneTrace : </h4>";
-echo ($laTrace->toString());
-echo ('<br>');
+echo($laTrace->toString());
+echo('<br>');
 
