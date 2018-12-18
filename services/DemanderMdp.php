@@ -25,7 +25,7 @@ if ($pseudo == '') {
     $msg = "Erreur : données incomplètes ou incorrectes.";
 } else {
     if ($dao->existePseudoUtilisateur($pseudo) == false) {
-        $msg = "Pseudo non existant.";
+        $msg = "Erreur : pseudo inexistant.";
     } else if ($dao->existePseudoUtilisateur($pseudo)) {
         // Récupération de l'utilisateur concerné
         $utilisateur = $dao->getUnUtilisateur($pseudo);
@@ -42,7 +42,8 @@ if ($pseudo == '') {
         } else {
             // Envoi du mail avec le mot de passe généré précedemment
             $sujet = "Mot de passe oublié - Système Trace GPS";
-            $contenuMail = "Suite à votre demande de changement de mot passe dû a un oubli de celui-ci, nous vous ";
+            $contenuMail = "Cher / Chere ". $pseudo. "\r\n";
+            $contenuMail .= "Suite à votre demande de changement de mot passe dû a un oubli de celui-ci, nous vous ";
             $contenuMail .= "envoyons votre nouveau mot de passe ci-dessous :" . "\r\n";
             $contenuMail .= "Votre nouveau mot de passe : " . $password . " (nous vous conseillons de le changer par la suite)\n";
 
@@ -52,8 +53,7 @@ if ($pseudo == '') {
                 $msg = "L'envoi du courriel concernant la réinitialisation du mot de passe a rencontré un problème.";
             } else {
                 // tout a bien fonctionné
-                $msg = "La demande de changement de mot de passe est en cours de traitement," .
-                    " vous allez recevoir un courriel avec votre mot de passe.";
+                $msg = "Vous allez recevoir un courriel avec votre nouveau mot de passe.";
             }
         }
     }
