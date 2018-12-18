@@ -61,7 +61,7 @@ else
                     // suppression de la trace dans la BDD
                     $ok = $dao->supprimerUneTrace($idTrace);
                     if ( ! $ok ) {
-                        $msg = "Erreur : problème lors de la suppression de l'utilisateur.";
+                        $msg = "Erreur : problème lors de la suppression du parcours.";
                     }
                   
                         else {
@@ -139,4 +139,3 @@ function creerFluxJSON($msg)
     echo json_encode($elt_racine, JSON_PRETTY_PRINT);
     return;
 }
-?>
