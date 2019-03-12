@@ -25,7 +25,7 @@ if ( empty ($_REQUEST ["lang"]) == true) $lang = "";  else $lang = strtolower($_
 if ($lang != "json") $lang = "xml";
 
 // Contrôle de la présence des paramètres
-if ( $pseudo == "" || $mdpSha1 == "" || $pseudoARetirer == "" )
+if ( $pseudo == "" || $mdpSha1 == "" || $pseudoARetirer == "")
 {	$msg = "Erreur : données incomplètes.";
 }
 else
@@ -36,7 +36,6 @@ else
     else
     {
         $utilisateur = $dao->getUnUtilisateur($pseudoARetirer);
-        var_dump($utilisateur);
 
         if($utilisateur == null)
         {
@@ -74,7 +73,13 @@ else
                         $sujetMail = "Suppression d'autorisation de la part d'un utilisateur du système TraceGPS";
                         $contenuMail = "Cher ou chère " . $pseudoARetirer . "\n\n";
                         $contenuMail .= "L'utilisateur ".$pseudo." du système TraceGPS vous retire l'autorisation de suivre ses parcours.\n\n";
-                        $contenuMail .= "Son message : " . $texteMessage . "\n\n";
+
+                        if (! $texteMessage === "") {
+                            $contenuMail .= "Son message : " . $texteMessage . "\n\n";
+                        } else {
+                            $contenuMail .= "Il n'a pas laissé de message précisant les raisons de cette action.\n\n";
+                        }
+
                         $contenuMail .= "Cordialement "."\n\n";
                         $contenuMail .= "L'administrateur du système TraceGPS";
                         $ok = Outils::envoyerMail($adrMailDemandeur, $sujetMail, $contenuMail, $adrMailDestinataire);
