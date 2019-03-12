@@ -35,7 +35,9 @@ else
     }
     else
     {
-        $utilisateur = $dao->getUnUtilisateur($pseudo);
+        $utilisateur = $dao->getUnUtilisateur($pseudoARetirer);
+        var_dump($utilisateur);
+
         if($utilisateur == null)
         {
             $msg = "Erreur : pseudo utilisateur inexistant.";
@@ -67,7 +69,7 @@ else
                         $adrMailDestinataire = $destinataire->getAdrMail();
                         $lien1 = "http://localhost/ws-php-leilla/tracegps/services/ValiderDemandeAutorisation.php?a=" . $mdpSha1 . "&b=" . $pseudo . "&c=" . $pseudoARetirer . "&d=1";
                         $lien2 = "http://localhost/ws-php-leilla/tracegps/services/ValiderDemandeAutorisation.php?a=" . $mdpSha1 . "&b=" . $pseudo . "&c=" . $pseudoARetirer . "&d=0";
-                        $msg = $pseudoARetirer. " va recevoir un courriel avec votre demande.";
+                        $msg = "Autorisation supprimée ; " . $pseudoARetirer . " va recevoir un courriel de notification.";
 
                         $sujetMail = "Suppression d'autorisation de la part d'un utilisateur du système TraceGPS";
                         $contenuMail = "Cher ou chère " . $pseudoARetirer . "\n\n";
