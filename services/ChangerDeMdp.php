@@ -104,7 +104,7 @@ function creerFluxXML($msg)
 	$doc->encoding = 'UTF-8';
 	
 	// crée un commentaire et l'encode en UTF-8
-	$elt_commentaire = $doc->createComment('Service web ChangerDeMdp - BTS SIO - Lycée De La Salle - Rennes');
+	$elt_commentaire = $doc->createComment('Service web ChangerDeMdp - BTS SIO - Lyc�e De La Salle - Rennes');
 	// place ce commentaire à la racine du document XML
 	$doc->appendChild($elt_commentaire);
 	
