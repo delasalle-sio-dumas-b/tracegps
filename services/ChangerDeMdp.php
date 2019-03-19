@@ -36,7 +36,7 @@ if ($lang != "json") $lang = "xml";
 
 // Contrôle de la présence des paramètres
 if ( $pseudo == "" || $mdpSha1 == "" || $nouveauMdp == "" || $confirmationMdp == "" ) {
-    $msg = "Erreur : données incomplètes.";
+    $msg = "Erreur : donn�es incompl�tes.";
 }
 else {
     if ( strlen($nouveauMdp) < 8 ) {
