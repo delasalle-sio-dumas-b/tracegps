@@ -40,11 +40,11 @@ if ( $pseudo == "" || $mdpSha1 == "" || $nouveauMdp == "" || $confirmationMdp ==
 }
 else {
     if ( strlen($nouveauMdp) < 8 ) {
-        $msg = 'Erreur : le mot de passe doit comporter au moins 8 caractÃ¨res.';
+        $msg = 'Erreur : le mot de passe doit comporter au moins 8 caractères.';
     }
     else {
     	if ( $nouveauMdp != $confirmationMdp ) {
-    	    $msg = "Erreur : le nouveau mot de passe et sa confirmation sont diffÃ©rents.";
+    	    $msg = "Erreur : le nouveau mot de passe et sa confirmation sont différents.";
     	}
     	else {
     		if ( $dao->getNiveauConnexion($pseudo, $mdpSha1) == 0 ) {
@@ -54,16 +54,16 @@ else {
     			// enregistre le nouveau mot de passe de l'utilisateur dans la bdd aprÃ¨s l'avoir codÃ© en sha1
     		    $ok = $dao->modifierMdpUtilisateur ($pseudo, $nouveauMdp);
     		    if ( ! $ok ) {
-    		        $msg = "Erreur : problÃ¨me lors de l'enregistrement du mot de passe.";
+    		        $msg = "Erreur : problème lors de l'enregistrement du mot de passe.";
     		    }
     		    else {
     		        // envoie un courriel  Ã  l'utilisateur avec son nouveau mot de passe 
     		        $ok = $dao->envoyerMdp ($pseudo, $nouveauMdp);
     		        if ( ! $ok ) {
-        			    $msg = "Enregistrement effectuÃ© ; l'envoi du courriel  de confirmation a rencontrÃ© un problÃ¨me.";
+        			    $msg = "Enregistrement effectué ; l'envoi du courriel de confirmation a rencontré un problème.";
     		        }
     		        else {
-        			    $msg = "Enregistrement effectuÃ© ; vous allez recevoir un courriel  de confirmation.";
+        			    $msg = "Enregistrement effectué ; vous allez recevoir un courriel  de confirmation.";
     		        }
     		    }
     		}
