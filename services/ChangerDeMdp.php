@@ -36,15 +36,15 @@ if ($lang != "json") $lang = "xml";
 
 // Contr√¥le de la pr√©sence des param√®tres
 if ( $pseudo == "" || $mdpSha1 == "" || $nouveauMdp == "" || $confirmationMdp == "" ) {
-    $msg = "Erreur : donn√©es incompl√®tes.";
+    $msg = "Erreur : donnÈes incomplËtes.";
 }
 else {
     if ( strlen($nouveauMdp) < 8 ) {
-        $msg = 'Erreur : le mot de passe doit comporter au moins 8 caract√®res.';
+        $msg = 'Erreur : le mot de passe doit comporter au moins 8 caractËres.';
     }
     else {
     	if ( $nouveauMdp != $confirmationMdp ) {
-    	    $msg = "Erreur : le nouveau mot de passe et sa confirmation sont diff√©rents.";
+    	    $msg = "Erreur : le nouveau mot de passe et sa confirmation sont diffÈrents.";
     	}
     	else {
     		if ( $dao->getNiveauConnexion($pseudo, $mdpSha1) == 0 ) {
@@ -54,16 +54,16 @@ else {
     			// enregistre le nouveau mot de passe de l'utilisateur dans la bdd apr√®s l'avoir cod√© en sha1
     		    $ok = $dao->modifierMdpUtilisateur ($pseudo, $nouveauMdp);
     		    if ( ! $ok ) {
-    		        $msg = "Erreur : probl√®me lors de l'enregistrement du mot de passe.";
+    		        $msg = "Erreur : problËme lors de l'enregistrement du mot de passe.";
     		    }
     		    else {
     		        // envoie un courriel  √† l'utilisateur avec son nouveau mot de passe 
     		        $ok = $dao->envoyerMdp ($pseudo, $nouveauMdp);
     		        if ( ! $ok ) {
-        			    $msg = "Enregistrement effectu√© ; l'envoi du courriel  de confirmation a rencontr√© un probl√®me.";
+        			    $msg = "Enregistrement effectuÈ ; l'envoi du courriel de confirmation a rencontrÈ un problËme.";
     		        }
     		        else {
-        			    $msg = "Enregistrement effectu√© ; vous allez recevoir un courriel  de confirmation.";
+        			    $msg = "Enregistrement effectuÈ ; vous allez recevoir un courriel de confirmation.";
     		        }
     		    }
     		}
@@ -104,7 +104,7 @@ function creerFluxXML($msg)
 	$doc->encoding = 'UTF-8';
 	
 	// cr√©e un commentaire et l'encode en UTF-8
-	$elt_commentaire = $doc->createComment('Service web ChangerDeMdp - BTS SIO - Lyc√©e De La Salle - Rennes');
+	$elt_commentaire = $doc->createComment('Service web ChangerDeMdp - BTS SIO - LycÈe De La Salle - Rennes');
 	// place ce commentaire √† la racine du document XML
 	$doc->appendChild($elt_commentaire);
 	

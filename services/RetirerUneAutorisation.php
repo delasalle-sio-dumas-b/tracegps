@@ -9,81 +9,79 @@
 // Le service retourne un flux de données XML ou JSON contenant un compte-rendu d'exécution
 
 // connexion du serveur web à la base MySQL
-include_once ('../modele/DAO.class.php');
+include_once('../modele/DAO.class.php');
 $dao = new DAO();
 
 // Récupération des données transmises
 // la fonction $_GET récupère une donnée passée en paramètre dans l'URL par la méthode GET
 // la fonction $_POST récupère une donnée envoyées par la méthode POST
 // la fonction $_REQUEST récupère par défaut le contenu des variables $_GET, $_POST, $_COOKIE
-if ( empty ($_REQUEST ["pseudo"]) == true)  $pseudo = "";  else   $pseudo = $_REQUEST ["pseudo"];
-if ( empty ($_REQUEST ["mdpSha1"]) == true)  $mdpSha1 = "";  else   $mdpSha1 = $_REQUEST ["mdpSha1"];
-if ( empty ($_REQUEST ["pseudoARetirer"]) == true)  $pseudoDestinataire = "";  else $pseudoARetirer = $_REQUEST ["pseudoARetirer"];
-if ( empty ($_REQUEST ["texteMessage"]) == true) $texteMessage = "";  else $texteMessage = $_REQUEST ["texteMessage"];
-if ( empty ($_REQUEST ["lang"]) == true) $lang = "";  else $lang = strtolower($_REQUEST ["lang"]);
+if (empty ($_REQUEST ["pseudo"]) == true) $pseudo = ""; else   $pseudo = $_REQUEST ["pseudo"];
+if (empty ($_REQUEST ["mdpSha1"]) == true) $mdpSha1 = ""; else   $mdpSha1 = $_REQUEST ["mdpSha1"];
+if (empty ($_REQUEST ["pseudoARetirer"]) == true) $pseudoDestinataire = ""; else $pseudoARetirer = $_REQUEST ["pseudoARetirer"];
+if (empty ($_REQUEST ["texteMessage"]) == true) $texteMessage = ""; else $texteMessage = $_REQUEST ["texteMessage"];
+if (empty ($_REQUEST ["lang"]) == true) $lang = ""; else $lang = strtolower($_REQUEST ["lang"]);
 // "xml" par défaut si le paramètre lang est absent ou incorrect
 if ($lang != "json") $lang = "xml";
 
 // Contrôle de la présence des paramètres
-if ( $pseudo == "" || $mdpSha1 == "" || $pseudoARetirer == "")
-{	$msg = "Erreur : données incomplètes.";
-}
-else
-{
-    if ( $dao->getNiveauConnexion($pseudo, $mdpSha1) == 0 )
-    {   $msg = "Erreur : authentification incorrecte.";
-    }
-    else
-    {
+if ($pseudo == "" || $mdpSha1 == "" || $pseudoARetirer == "") {
+    $msg = "Erreur : données incomplètes.";
+} else {
+    if ($dao->getNiveauConnexion($pseudo, $mdpSha1) == 0) {
+        $msg = "Erreur : authentification incorrecte.";
+    } else {
         $utilisateur = $dao->getUnUtilisateur($pseudoARetirer);
 
-        if($utilisateur == null)
-        {
+        if ($utilisateur == null) {
             $msg = "Erreur : pseudo utilisateur inexistant.";
-        }
-        else { $autorisant = $dao->getUnUtilisateur($pseudo)->getId();
+        } else {
+            $autorisant = $dao->getUnUtilisateur($pseudo)->getId();
 
             $autorise = $dao->getUnUtilisateur($pseudoARetirer)->getId();
 
-            if( ! $dao->autoriseAConsulter($autorisant, $autorise))
-            {
+            if (!$dao->autoriseAConsulter($autorisant, $autorise)) {
                 $msg = "Erreur : l'autorisation n'était pas accordée.";
-            }
-            else{
+            } else {
                 $ok = $dao->supprimerUneAutorisation($autorisant, $autorise);
-                if ( ! $ok )
-                {
+                if (!$ok) {
                     $msg = "Erreur : problème lors de la suppression de l'utilisateur.";
-                }
-                else {
+                } else {
                     $utilisateur = $dao->getUnUtilisateur($pseudo);
                     $numTelUtilisateur = $utilisateur->getNumTel();
+<<<<<<< HEAD
                    $adrMailDemandeur = $utilisateur->getAdrMail();
                     $msg = 'Autorisation supprimée.';
                     if ($dao->existePseudoUtilisateur($pseudoARetirer) == false) {
                         $msg = 'Erreur : pseudo du destinataire inexistant.';
+=======
+                }
+                $adrMailDemandeur = $utilisateur->getAdrMail();
+                $msg = 'Autorisation supprimée.';
+                if ($dao->existePseudoUtilisateur($pseudoARetirer) == false) {
+                    $msg = 'Erreur : pseudo du destinataire inexistant.';
+                } else {
+                    $destinataire = $dao->getUnUtilisateur($pseudoARetirer);
+                    $idDestinataire = $destinataire->getId();
+                    $adrMailDestinataire = $destinataire->getAdrMail();
+                    $lien1 = "http://localhost/ws-php-leilla/tracegps/services/ValiderDemandeAutorisation.php?a=" . $mdpSha1 . "&b=" . $pseudo . "&c=" . $pseudoARetirer . "&d=1";
+                    $lien2 = "http://localhost/ws-php-leilla/tracegps/services/ValiderDemandeAutorisation.php?a=" . $mdpSha1 . "&b=" . $pseudo . "&c=" . $pseudoARetirer . "&d=0";
+                    $msg = "Autorisation supprimée ; " . $pseudoARetirer . " va recevoir un courriel de notification.";
+
+                    $sujetMail = "Suppression d'autorisation de la part d'un utilisateur du système TraceGPS";
+                    $contenuMail = "Cher ou chère " . $pseudoARetirer . "\n\n";
+                    $contenuMail .= "L'utilisateur " . $pseudo . " du système TraceGPS vous retire l'autorisation de suivre ses parcours.\n\n";
+
+                    if (!$texteMessage === "") {
+                        $contenuMail .= "Son message : " . $texteMessage . "\n\n";
+>>>>>>> branch 'master' of https://github.com/delasalle-sio-dumas-b/tracegps.git
                     } else {
-                        $destinataire = $dao->getUnUtilisateur($pseudoARetirer);
-                        $idDestinataire = $destinataire->getId();
-                        $adrMailDestinataire = $destinataire->getAdrMail();
-                        $lien1 = "http://localhost/ws-php-leilla/tracegps/services/ValiderDemandeAutorisation.php?a=" . $mdpSha1 . "&b=" . $pseudo . "&c=" . $pseudoARetirer . "&d=1";
-                        $lien2 = "http://localhost/ws-php-leilla/tracegps/services/ValiderDemandeAutorisation.php?a=" . $mdpSha1 . "&b=" . $pseudo . "&c=" . $pseudoARetirer . "&d=0";
-                        $msg = "Autorisation supprimée ; " . $pseudoARetirer . " va recevoir un courriel de notification.";
-
-                        $sujetMail = "Suppression d'autorisation de la part d'un utilisateur du système TraceGPS";
-                        $contenuMail = "Cher ou chère " . $pseudoARetirer . "\n\n";
-                        $contenuMail .= "L'utilisateur ".$pseudo." du système TraceGPS vous retire l'autorisation de suivre ses parcours.\n\n";
-
-                        if (! $texteMessage === "") {
-                            $contenuMail .= "Son message : " . $texteMessage . "\n\n";
-                        } else {
-                            $contenuMail .= "Il n'a pas laissé de message précisant les raisons de cette action.\n\n";
-                        }
-
-                        $contenuMail .= "Cordialement "."\n\n";
-                        $contenuMail .= "L'administrateur du système TraceGPS";
-                        $ok = Outils::envoyerMail($adrMailDemandeur, $sujetMail, $contenuMail, $adrMailDestinataire);
+                        $contenuMail .= "Il n'a pas laissé de message précisant les raisons de cette action.\n\n";
                     }
+
+                    $contenuMail .= "Cordialement " . "\n\n";
+                    $contenuMail .= "L'administrateur du système TraceGPS";
+                    $ok = Outils::envoyerMail($adrMailDemandeur, $sujetMail, $contenuMail, $adrMailDestinataire);
                 }
             }
         }
@@ -96,8 +94,7 @@ unset($dao);
 // création du flux en sortie
 if ($lang == "xml") {
     creerFluxXML($msg);
-}
-else {
+} else {
     creerFluxJSON($msg);
 }
 
@@ -163,4 +160,5 @@ function creerFluxJSON($msg)
     echo json_encode($elt_racine, JSON_PRETTY_PRINT);
     return;
 }
+
 ?>
