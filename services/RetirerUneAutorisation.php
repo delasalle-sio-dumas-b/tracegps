@@ -58,7 +58,7 @@ else
                 else {
                     $utilisateur = $dao->getUnUtilisateur($pseudo);
                     $numTelUtilisateur = $utilisateur->getNumTel();
-                )   $adrMailDemandeur = $utilisateur->getAdrMail();
+                   $adrMailDemandeur = $utilisateur->getAdrMail();
                     $msg = 'Autorisation supprimée.';
                     if ($dao->existePseudoUtilisateur($pseudoARetirer) == false) {
                         $msg = 'Erreur : pseudo du destinataire inexistant.';
