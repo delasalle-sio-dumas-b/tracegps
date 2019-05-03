@@ -49,12 +49,6 @@ if ($pseudo == "" || $mdpSha1 == "" || $pseudoARetirer == "") {
                 } else {
                     $utilisateur = $dao->getUnUtilisateur($pseudo);
                     $numTelUtilisateur = $utilisateur->getNumTel();
-<<<<<<< HEAD
-                   $adrMailDemandeur = $utilisateur->getAdrMail();
-                    $msg = 'Autorisation supprimée.';
-                    if ($dao->existePseudoUtilisateur($pseudoARetirer) == false) {
-                        $msg = 'Erreur : pseudo du destinataire inexistant.';
-=======
                 }
                 $adrMailDemandeur = $utilisateur->getAdrMail();
                 $msg = 'Autorisation supprimée.';
@@ -74,7 +68,6 @@ if ($pseudo == "" || $mdpSha1 == "" || $pseudoARetirer == "") {
 
                     if (!$texteMessage === "") {
                         $contenuMail .= "Son message : " . $texteMessage . "\n\n";
->>>>>>> branch 'master' of https://github.com/delasalle-sio-dumas-b/tracegps.git
                     } else {
                         $contenuMail .= "Il n'a pas laissé de message précisant les raisons de cette action.\n\n";
                     }
